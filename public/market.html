@@ -26,19 +26,31 @@
         </span>
     </div>
 
-    <div class="container flex flex-col items-center justify-center text-center pt-12 pb-24 px-4 overflow-hidden mb-5">
+    <div class="container flex flex-col items-center justify-center text-center pt-12 pb-24 px-4 overflow-hidden mb-5 cursor-default">
         <h3 class="text-white text-5xl mb-8">Our New Offer's</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default">
-                <img src="../public/static/image1.jpg" alt="Product 1" class="w-full h-48 object-cover rounded-t-lg">
-                <h3 class="text-xl text-white font-semibold mt-4">KOlor</h3>
-                <p class="text-white mt-2">$29.99</p>
-            </div>
-            <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default">
-                <img src="../public/static/image2.jpg" alt="Product 2" class="w-full h-48 object-cover rounded-t-lg">
-                <h3 class="text-xl text-white font-semibold mt-4">Product 2</h3>
-                <p class="text-white mt-2">$39.99</p> <a href="">add to char</a>
-            </div>
+            <div class="relative flex flex-col my-6 bg-gray-900 hover:bg-gray-900/40 shadow-sm rounded-lg w-96 hover:-translate-y-1 transition-all duration-300 ease-in-out backdrop-blur-3xl">
+  <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
+    <img src="static/image2.jpg" alt="card-image" />
+  </div>
+  <div class="flex justify-end mr-4">
+    <a class="rounded-full bg-fuchsia-600 py-2 px-2 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none cursor-pointer hover:bg-inherit hover:border-fuchsia-600 border-solid hover:text-fuchsia-400 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+      <img src="icon/heart-regular-full.svg" alt="" srcset="" width="40px">
+    </a>
+  </div>
+  <div class="p-4">
+    <h6 class="mb-2 text-xl font-semibold text-white">
+      Jacket
+    </h6>
+    <p class="text-white leading-normal font-light">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, excepturi voluptatem. Magnam illo nam quibusdam iusto inventore error maiores facere earum facilis? Ipsam, quos similique. Laudantium nemo soluta expedita sequi!
+    </p>
+  </div>
+  <div class="px-4 pb-4 pt-0 mt-2 gap-4 flex justify-between items-center">
+    <p class="text-gray-600 border border-solid border-gray-800 px-4 py-2 rounded-md hover:bg-gray-600 hover:text-white transition-all duration-300 delay-100 ease-in-out">$299.99</p>
+    <a class="rounded-md bg-blue-600 py-2 px-4 border-transparent cursor-pointer text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:shadow-none hover:bg-inherit hover:border-blue-600 border border-solid hover:text-blue-400 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">Add to Chart</a>
+  </div>
+</div>  
     </div>
 </body>
 
