@@ -15,3 +15,21 @@ body {
   opacity: 0.8;
   mix-blend-mode: screen;
 }
+
+.static-shine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 40%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  /* glossy static look */
+}
