@@ -198,3 +198,4 @@ window.addEventListener("scroll", handleScroll);
 
 // Responsive re-render
 window.addEventListener("resize", () => renderLinks());
+
