@@ -16,6 +16,17 @@ body {
   mix-blend-mode: screen;
 }
 
+/* Custom transition for navbar */
+.navbar-hide {
+  transform: translateY(-100px);
+  transition: transform 0.3s;
+}
+
+.navbar-show {
+  transform: translateY(0);
+  transition: transform 0.3s;
+}
+
 .static-shine {
   position: absolute;
   top: 50%;
