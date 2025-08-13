@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="../src/input.css" />
   <link rel="stylesheet" href="../src/output.css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet" />  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body class="bg-[#111215] min-h-screen hero-bg-glow">
@@ -110,26 +112,26 @@
     </span>
     <!-- Badge -->
     <div
-      class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-8 text-white text-sm font-medium shadow-sm">
+      class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-8 text-white text-sm font-medium shadow-sm" data-aos="zoom-in">
       <svg class="w-5 h-5 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
         <path d="M10 1.5l2.09 6.26H18l-5.18 3.76 2.09 6.26L10 13.76l-5.18 3.76 2.09-6.26L2 7.76h5.91z" />
       </svg>
       Indonesia's Favorite Teen Apparel
     </div>
     <!-- Heading -->
-    <h1 class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight max-w-4xl mb-6"
+    <h1 data-aos="zoom-in" class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight max-w-4xl mb-6"
       style="letter-spacing: -1px">
       Minimalist Fashion for the <br class="hidden md:block" />
       Bold Generation.
     </h1>
     <!-- Subheading -->
-    <p class="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-normal">
+    <p data-aos="zoom-in" class="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-normal">
       Level up your style game with trendy, affordable clothing designed for
       teens. From sleek basics to statement pieces, Apparels16 brings you
       confidence and comfort in every fit.
     </p>
     <!-- Buttons -->
-    <div class="flex flex-row gap-4 justify-center">
+    <div data-aos="zoom-in" class="flex flex-row gap-4 justify-center">
       <a href="market.html"
         class="px-8 py-3 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-lg hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-150">Shop
         Now</a>
@@ -158,21 +160,21 @@
     </span>
     <div class="flex">
       <div class="max-w-3xl mx-7">
-        <div
+        <div data-aos="fade-right"
           class="inline-flex items-center px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-8 text-white text-sm font-medium shadow-sm">
           Features & Benefits
         </div>
-        <h2 class="text-gray-300 text-3xl md:text-xl mb-8">
+        <h2 data-aos="fade-right" class="text-gray-300 text-3xl md:text-xl mb-8">
           The Complete Collection for Teens Who Dare to Stand Out
         </h2>
-        <p class="text-white mb-5">Explore modern, minimalist fashion essentials made to elevate your look without
+        <p data-aos="fade-right"  class="text-white mb-5">Explore modern, minimalist fashion essentials made to elevate your look without
           overcomplicating your wardrobe.</p>
-        <a href="features.html"
+        <a data-aos="fade-right" href="features.html"
           class="px-5 py-2 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-lg hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-150">Explore
           Our Features</a>
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
+      <div data-aos="fade-left" class="grid grid-cols-2 gap-4">
         <div
           class="card text-white border border-solid border-r-blue-300 border-l-blue-300 border-t-blue-500 border-b-blue-500 rounded-lg p-5 hover:-translate-y-1 hover:shadow-blue-600 shadow-lg transition-all duration-300 delay-100 cursor-default">
           <h2 class="font-bold">Trendy & Versatile</h2>
@@ -206,12 +208,12 @@
 
   <!-- Main Section -->
   <section class="relative flex flex-col items-center justify-center py-20 px-4 md:px-16 bg-[#101015] overflow-hidden">
-    <div
+    <div data-aos="fade-down"
       class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-8 text-white text-sm font-medium shadow-sm">
       <p>Collection & Fashion</p>
     </div>
 
-    <div class="text-center">
+    <div class="text-center" data-aos="fade-down">
       <h2 class="text-white text-7xl md:text-6xl font-sm mb-4">
         We dont just sell clothes -
         <br> we create a lifestyle.
@@ -219,8 +221,8 @@
     </div>
 
     <div class="flex justify-around w-full  mt-10">
-      <img src="../public/static/image1.jpg" class="rounded-2xl w-[1200px]" alt="">
-      <div class="ml-7">
+      <img data-aos="fade-right" src="../public/static/image1.jpg" class="rounded-2xl w-[1200px]" alt="">
+      <div class="ml-7 " data-aos="fade-left">
         <span
           class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm">Fashion
           Insight</span>
@@ -238,9 +240,9 @@
     </div>
     <div class="flex flex-row-reverse justify-around w-full  mt-24">
 
-      <img src="../public/static/image2.jpg" class="rounded-2xl w-[500px]" width="" alt="">
+      <img data-aos="fade-left" src="../public/static/image2.jpg" class="rounded-2xl w-[500px]" width="" alt="">
 
-      <div class="mr-7 text-right">
+      <div class="mr-7 text-right" data-aos="fade-right">
         <span
           class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm">Style
           Recommendations
@@ -251,15 +253,16 @@
           magnam nisi!</p>
         <div class="mt-6">
           <a href="#"
-            class="px-5 py-2 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-lg hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-150">Get My Style</a>
+            class="px-5 py-2 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-lg hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-150">Get
+            My Style</a>
         </div>
 
       </div>
     </div>
 
     <div class="flex justify-around w-full  mt-24">
-      <img src="../public/static/image3.jpg" class="rounded-2xl w-[500px]" alt="">
-      <div class="ml-7">
+      <img data-aos="fade-right" src="../public/static/image3.jpg" class="rounded-2xl w-[500px]" alt="">
+      <div class="ml-7" data-aos="fade-left">
         <span
           class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm">Community
           Highlights
@@ -270,7 +273,8 @@
           magnam nisi!</p>
         <div class="mt-6">
           <a href="#"
-            class="px-5 py-2 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-lg hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-150">Join The Community</a>
+            class="px-5 py-2 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-lg hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-150">Join
+            The Community</a>
         </div>
 
       </div>
@@ -278,232 +282,204 @@
   </section>
 
   <!-- Comment Section -->
-    <section class="relative flex flex-col items-center justify-center py-20 px-4 md:px-16 bg-[#101015] overflow-hidden">
-      <div
+  <section class="relative flex flex-col items-center justify-center py-20 px-4 md:px-16 bg-[#101015] overflow-hidden">
+    <div data-aos="fade-down"
       class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-8 text-white text-sm font-medium shadow-sm">
       <p>What Our Customers Say?</p>
     </div>
 
-    <div class="text-center">
+    <div class="text-center" data-aos="fade-down">
       <h2 class="text-white text-7xl md:text-5xl font-sm mb-7">
         Hear From Our Happy
         <br> Customers: Their Style Stories
       </h2>
     </div>
 
-      <div class="grid grid-cols-3 gap-4 mt-5 ml-5 mr-5 mb-5 ">
-        <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/men/1.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>Emily R.</h2>
-              <p>Graphic Designer</p>
-            </div>
+    <div class="grid grid-cols-3 gap-4 mt-5 ml-5 mr-5 mb-5 " data-aos="zoom-in-down">
+      <div
+        class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default">
+        <div class="profile flex gap-3 items-center">
+          <div class="image">
+            <img class="rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg" alt="" width="60px" />
           </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-              The material quality is beyond my expectations! The jacket I bought is not only stylish but also incredibly comfortable to wear. The delivery was fast and the packaging was neat. Highly recommended
-            </p>
+          <div class="user-profile text-white">
+            <h2>Emily R.</h2>
+            <p>Graphic Designer</p>
           </div>
         </div>
-        <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/men/2.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>Jason M</h2>
-              <p>Product Manager</p>
-            </div>
-          </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-              I absolutely love the collection! The clothes here are unique and make me feel confident. The size guide was accurate, so everything fit me perfectly. Finally, I found an online store that matches my style.
-            </p>
-          </div>
+        <div class="comment text-white flex flex-col gap-3 mt-3">
+          <p class="text-sm">⭐⭐⭐⭐⭐</p>
+          <p class="text-sm">
+            The material quality is beyond my expectations! The jacket I bought is not only stylish but also incredibly
+            comfortable to wear. The delivery was fast and the packaging was neat. Highly recommended
+          </p>
         </div>
-        <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/women/3.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>Sara D.</h2>
-              <p>Freelancer</p>
-            </div>
-          </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-              The work suit I bought here successfully made me look more professional. The material is lightweight and doesn’t wrinkle easily. The service was friendly and responsive when I asked about product details.
-            </p>
-          </div>
+      </div>
+      <div
+        class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
+          <div class=" profile flex gap-3 items-center">
+        <div class="image">
+          <img class="rounded-full" src="https://randomuser.me/api/portraits/men/2.jpg" alt="" width="60px" />
         </div>
-        <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/men/4.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>Mark T</h2>
-              <p>Startup Founder</p>
-            </div>
-          </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-              I’ve shopped here several times and have never been disappointed. The product variety is always up-to-date with current trends. The checkout process is also easy and hassle-free. Highly recommended!
-            </p>
-          </div>
+        <div class="user-profile text-white">
+          <h2>Jason M</h2>
+          <p>Product Manager</p>
         </div>
-        <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/women/2.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>Lena K</h2>
-              <p>UX Consultant</p>
-            </div>
-          </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-             The colors match the photos exactly! Sometimes they look different, but here it’s spot on. The clothes are perfect for everyday outfits or casual events. I’ll definitely be a regular customer.
-            </p>
-          </div>
-        </div>
-        <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/men/5.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>David V</h2>
-              <p>IT Director</p>
-            </div>
-          </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-              I was hesitant to buy online at first, but after reading other reviews, I was curious. It turns out the quality is great! The styles are fashionable and the material is very comfortable. The delivery service was also excellent.
-            </p>
-          </div>
-        </div>
+      </div>
+      <div class="comment text-white flex flex-col gap-3 mt-3">
+        <p class="text-sm">⭐⭐⭐⭐⭐</p>
+        <p class="text-sm">
+          I absolutely love the collection! The clothes here are unique and make me feel confident. The size guide was
+          accurate, so everything fit me perfectly. Finally, I found an online store that matches my style.
+        </p>
+      </div>
+    </div>
+    <div
+      class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
+          <div class=" profile flex gap-3 items-center">
+      <div class="image">
+        <img class="rounded-full" src="https://randomuser.me/api/portraits/women/3.jpg" alt="" width="60px" />
+      </div>
+      <div class="user-profile text-white">
+        <h2>Sara D.</h2>
+        <p>Freelancer</p>
+      </div>
+    </div>
+    <div class="comment text-white flex flex-col gap-3 mt-3">
+      <p class="text-sm">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm">
+        The work suit I bought here successfully made me look more professional. The material is lightweight and doesn’t
+        wrinkle easily. The service was friendly and responsive when I asked about product details.
+      </p>
+    </div>
+    </div>
+    <div
+      class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
+          <div class=" profile flex gap-3 items-center">
+      <div class="image">
+        <img class="rounded-full" src="https://randomuser.me/api/portraits/men/4.jpg" alt="" width="60px" />
+      </div>
+      <div class="user-profile text-white">
+        <h2>Mark T</h2>
+        <p>Startup Founder</p>
+      </div>
+    </div>
+    <div class="comment text-white flex flex-col gap-3 mt-3">
+      <p class="text-sm">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm">
+        I’ve shopped here several times and have never been disappointed. The product variety is always up-to-date with
+        current trends. The checkout process is also easy and hassle-free. Highly recommended!
+      </p>
+    </div>
+    </div>
+    <div
+      class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
+          <div class=" profile flex gap-3 items-center">
+      <div class="image">
+        <img class="rounded-full" src="https://randomuser.me/api/portraits/women/2.jpg" alt="" width="60px" />
+      </div>
+      <div class="user-profile text-white">
+        <h2>Lena K</h2>
+        <p>UX Consultant</p>
+      </div>
+    </div>
+    <div class="comment text-white flex flex-col gap-3 mt-3">
+      <p class="text-sm">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm">
+        The colors match the photos exactly! Sometimes they look different, but here it’s spot on. The clothes are
+        perfect for everyday outfits or casual events. I’ll definitely be a regular customer.
+      </p>
+    </div>
+    </div>
+    <div
+      class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
+          <div class=" profile flex gap-3 items-center">
+      <div class="image">
+        <img class="rounded-full" src="https://randomuser.me/api/portraits/men/5.jpg" alt="" width="60px" />
+      </div>
+      <div class="user-profile text-white">
+        <h2>David V</h2>
+        <p>IT Director</p>
+      </div>
+    </div>
+    <div class="comment text-white flex flex-col gap-3 mt-3">
+      <p class="text-sm">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm">
+        I was hesitant to buy online at first, but after reading other reviews, I was curious. It turns out the quality
+        is great! The styles are fashionable and the material is very comfortable. The delivery service was also
+        excellent.
+      </p>
+    </div>
+    </div>
 
-          <div class="bg-gray-900 p-5 rounded-4xl hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default" ">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/men/6.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>John Doe</h2>
-              <p>Founder</p>
-            </div>
-          </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae
-              autem ut quasi quam nulla expedita totam ipsum, numquam voluptates
-              laudantium nisi blanditiis tempora porro. Sed quis nemo quidem
-              odit. Corrupti.
-            </p>
-          </div>
-        </div>
-        <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/men/10.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>Fairuz Tsany</h2>
-              <p>Graphic Designer</p>
-            </div>
-          </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae
-              autem ut quasi quam nulla expedita totam ipsum, numquam voluptates
-              laudantium nisi blanditiis tempora porro. Sed quis nemo quidem
-              odit. Corrupti.
-            </p>
-          </div>
-        </div>
-        <div class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
-          <div class="profile flex gap-3 items-center">
-            <div class="image">
-              <img
-                class="rounded-full"
-                src="https://randomuser.me/api/portraits/men/11.jpg"
-                alt=""
-                width="60px"
-              />
-            </div>
-            <div class="user-profile text-white">
-              <h2>Peter Brandson</h2>
-              <p>Software Engineer</p>
-            </div>
-          </div>
-          <div class="comment text-white flex flex-col gap-3 mt-3">
-            <p class="text-sm">⭐⭐⭐⭐⭐</p>
-            <p class="text-sm">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae
-              autem ut quasi quam nulla expedita totam ipsum, numquam voluptates
-              laudantium nisi blanditiis tempora porro. Sed quis nemo quidem
-              odit. Corrupti.
-            </p>
-          </div>
-        </div>
+    <div
+      class="bg-gray-900 p-5 rounded-4xl hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default" ">
+          <div class=" profile flex gap-3 items-center">
+      <div class="image">
+        <img class="rounded-full" src="https://randomuser.me/api/portraits/men/6.jpg" alt="" width="60px" />
       </div>
-      <div class="absolute left-0 right-0 bottom-0 h-[300px]  bg-gradient-to-b from-black via-black to-transparent pointer-events-none">
+      <div class="user-profile text-white">
+        <h2>John Doe</h2>
+        <p>Founder</p>
       </div>
-    </section>
+    </div>
+    <div class="comment text-white flex flex-col gap-3 mt-3">
+      <p class="text-sm">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae
+        autem ut quasi quam nulla expedita totam ipsum, numquam voluptates
+        laudantium nisi blanditiis tempora porro. Sed quis nemo quidem
+        odit. Corrupti.
+      </p>
+    </div>
+    </div>
+    <div
+      class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
+          <div class=" profile flex gap-3 items-center">
+      <div class="image">
+        <img class="rounded-full" src="https://randomuser.me/api/portraits/men/10.jpg" alt="" width="60px" />
+      </div>
+      <div class="user-profile text-white">
+        <h2>Fairuz Tsany</h2>
+        <p>Graphic Designer</p>
+      </div>
+    </div>
+    <div class="comment text-white flex flex-col gap-3 mt-3">
+      <p class="text-sm">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae
+        autem ut quasi quam nulla expedita totam ipsum, numquam voluptates
+        laudantium nisi blanditiis tempora porro. Sed quis nemo quidem
+        odit. Corrupti.
+      </p>
+    </div>
+    </div>
+    <div
+      class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default"">
+          <div class=" profile flex gap-3 items-center">
+      <div class="image">
+        <img class="rounded-full" src="https://randomuser.me/api/portraits/men/11.jpg" alt="" width="60px" />
+      </div>
+      <div class="user-profile text-white">
+        <h2>Peter Brandson</h2>
+        <p>Software Engineer</p>
+      </div>
+    </div>
+    <div class="comment text-white flex flex-col gap-3 mt-3">
+      <p class="text-sm">⭐⭐⭐⭐⭐</p>
+      <p class="text-sm">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae
+        autem ut quasi quam nulla expedita totam ipsum, numquam voluptates
+        laudantium nisi blanditiis tempora porro. Sed quis nemo quidem
+        odit. Corrupti.
+      </p>
+    </div>
+    </div>
+    </div>
+    <div
+      class="absolute left-0 right-0 bottom-0 h-[300px]  bg-gradient-to-b from-black via-black to-transparent pointer-events-none">
+    </div>
+  </section>
 
   <footer class="relative bg-[#101015] border-t border-[#222234] py-12 px-4 md:px-16 overflow-hidden">
     <!-- Bintang dekoratif kiri -->
@@ -563,9 +539,10 @@
       </div>
     </div>
   </footer>
-  <script src="main.js
-    
-    "></script>
+  <script src="main.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 
 </html>
