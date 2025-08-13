@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Montserrat", system-ui, sans-serif;
+}
+.hero-bg-glow {
+  background: radial-gradient(
+    ellipse 70% 35% at 50% 90%,
+    #2563eb88 0%,
+    transparent 100%
+  );
+}
+.star-glow {
+  filter: blur(2px) drop-shadow(0 0 12px #2563ebcc);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
