@@ -1,107 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apparels - Contact</title>
     <link rel="stylesheet" href="../src/input.css" />
     <link rel="stylesheet" href="../src/output.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet" />
+</head>
 
-  <body class="bg-[#111215] min-h-screen hero-bg-glow">
+<body class="bg-[#111215] min-h-screen hero-bg-glow">
+
     <nav
-      class="w-full fixed z-50 bg-gradient-to-b from-black/50 to-transparent transition-all duration-300 backdrop-blur-sm"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-          <a
-            href="index.html"
-            id="logo"
-            class="text-white text-2xl font-semibold tracking-tight"
-            >Apparels 16</a
-          >
+        class="w-full fixed z-50 bg-gradient-to-b from-black/50 to-transparent transition-all duration-300 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" id="logo" class="text-white text-2xl font-semibold tracking-tight">Apparels 16</a>
 
-          <!-- Desktop Navigation Links -->
-          <div
-            class="hidden md:flex justify-center gap-8 items-center text-white"
-            id="navLinksContainer"
-          >
-            <a
-              href="index.html"
-              class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
-              >Home</a
-            >
-            <a
-              href="features.html"
-              class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
-              >Features</a
-            >
-            <a
-              href="market.html"
-              class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
-              >Collection</a
-            >
-            <a
-              href="#"
-              class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
-              >Contact</a
-            >
-          </div>
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex justify-center gap-8 items-center text-white" id="navLinksContainer">
+                    <a href="index.html"
+                        class="hover:underline hover:text-gray-500 transition-all delay-150 duration-300 ease-in-out">Home</a>
+                    <a href="features.html"
+                        class="hover:underline hover:text-gray-500 transition-all delay-150 duration-300 ease-in-out">Features</a>
+                    <a href="market.html"
+                        class="hover:underline hover:text-gray-500 transition-all delay-150 duration-300 ease-in-out">Collection</a>
+                    <a href="#"
+                        class="hover:underline hover:text-gray-500 transition-all delay-150 duration-300 ease-in-out">Contact</a>
+                </div>
 
-          <!-- Dark Mode Toggle (Desktop) -->
-          <div class="hidden md:flex items-center space-x-4">
-            <a
-              href=""
-              id="darkModeToggleDesktop"
-              class="p-2 px-8 py-2 rounded-full border bg-blue-700 border-transparent text-white text-sm font-semibold shadow-lg hover:bg-transparent hover:text-blue-600 delay-100 hover:border-blue-500 transition-all duration-300 active:scale-95"
-            >
-              Login
-            </a>
-          </div>
+                <!-- Dark Mode Toggle (Desktop) -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="" id="darkModeToggleDesktop"
+                        class="p-2 px-8 py-2 rounded-full border border-blue-700 bg-[#181923] text-white text-sm font-semibold shadow-lg hover:bg-blue-600 delay-100 hover:border-blue-500 transition-all duration-150">
+                        Login
+                    </a>
+                </div>
 
-          <!-- Mobile Menu Button -->
-          <a id="mobileMenuBtn" class="md:hidden p-2 rounded-lg">
-            <svg
-              href=""
-              id="mobileMenuIcon"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="white"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </a>
+                <!-- Mobile Menu Button -->
+                <a id="mobileMenuBtn" class="md:hidden p-2 rounded-lg">
+                    <svg href="" id="mobileMenuIcon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </a>
+            </div>
         </div>
-      </div>
 
-      <!-- Mobile Menu Overlay -->
-      <div
-        id="mobileMenu"
-        class="md:hidden shadow-lg border-t bg-white border-gray-100 hidden transition-all duration-300"
-      >
-        <div class="px-4 py-3 space-y-2" id="mobileNavLinksContainer">
-          <!-- Links will be inserted by JS -->
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenu"
+            class="md:hidden shadow-lg border-t bg-white border-gray-100 hidden transition-all duration-300">
+            <div class="px-4 py-3 space-y-2" id="mobileNavLinksContainer">
+                <!-- Links will be inserted by JS -->
+            </div>
+            <div class="px-4 py-3">
+                <button id="darkModeToggleMobile"
+                    class="w-full px-4 py-3 rounded-lg transition-all flex items-center text-gray-700">
+                    <!-- Label set by JS -->
+                </button>
+            </div>
         </div>
-        <div class="px-4 py-3">
-          <button
-            id="darkModeToggleMobile"
-            class="w-full px-4 py-3 rounded-lg transition-all flex items-center text-gray-700"
-          >
-            <!-- Label set by JS -->
-          </button>
-        </div>
-      </div>
     </nav>
-  </body>
+</body>
+
 </html>
