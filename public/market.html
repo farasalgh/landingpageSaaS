@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="../src/output.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body class="bg-[#111215] min-h-screen hero-bg-glow">
 
-    <nav
+    <nav data-aos="fade-down"
         class="w-full fixed z-50 bg-gradient-to-b from-black/50 to-transparent transition-all duration-300 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -64,7 +66,8 @@
         </div>
     </nav>
 
-    <div class="flex flex-col items-center justify-center text-center pt-12 pb-24 px-4 overflow-hidden mb-5">
+    <div data-aos="fade-down"
+        class="flex flex-col items-center justify-center text-center pt-12 pb-24 px-4 overflow-hidden mb-5">
         <span
             class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm">Here
             to shop & style your life
@@ -81,16 +84,17 @@
 
     <div class="container mx-auto px-4 py-12">
         <div class="flex justify-between items-center mb-12">
-            <h3 class="text-white text-5xl">Our New Offers & Trends</h3>
+            <h3 data-aos="fade-right" class="text-white text-5xl">Our New Offers & Trends</h3>
             <button id="toggleCards" class="text-blue-500 hover:text-blue-400 flex items-center gap-2">
-                <span id="toggleText">Show All</span>
-                <svg id="toggleIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span data-aos="fade-left" id="toggleText">Show All</span>
+                <svg data-aos="fade-left" id="toggleIcon" class="w-5 h-5" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="cardContainer">
+        <div data-aos="zoom-in-down" class="grid grid-cols-1 md:grid-cols-3 gap-8" id="cardContainer">
             <!-- Card -->
             <div class="card transform hover:scale-105 transition-all duration-300">
                 <div class="bg-gray-900/80 rounded-xl overflow-hidden backdrop-blur-lg">
@@ -115,15 +119,17 @@
                         <p class="text-gray-300 text-sm mb-6 line-clamp-2">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, excepturi voluptatem.
                         </p>
-                        <div class="flex justify-between items-center">
-                            <button
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex flex-row-reverse justify-between items-center">
+                            <button onclick="addToCart(this)"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0">
+                                <svg class="w-5 h-5 text-white transition-transform duration-300" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                Add to Cart
+                                <span class="transition-all duration-300">Add to Cart</span>
                             </button>
+
                             <button class="p-2 hover:text-blue-400 transition-colors">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -157,15 +163,17 @@
                         <p class="text-gray-300 text-sm mb-6 line-clamp-2">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, excepturi voluptatem.
                         </p>
-                        <div class="flex justify-between items-center">
-                            <button
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex flex-row-reverse justify-between items-center">
+                            <button onclick="addToCart(this)"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0">
+                                <svg class="w-5 h-5 text-white transition-transform duration-300" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                Add to Cart
+                                <span class="transition-all duration-300">Add to Cart</span>
                             </button>
+
                             <button class="p-2 hover:text-blue-400 transition-colors">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -199,15 +207,17 @@
                         <p class="text-gray-300 text-sm mb-6 line-clamp-2">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, excepturi voluptatem.
                         </p>
-                        <div class="flex justify-between items-center">
-                            <button
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex flex-row-reverse justify-between items-center">
+                            <button onclick="addToCart(this)"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0">
+                                <svg class="w-5 h-5 text-white transition-transform duration-300" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                Add to Cart
+                                <span class="transition-all duration-300">Add to Cart</span>
                             </button>
+
                             <button class="p-2 hover:text-blue-400 transition-colors">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -241,15 +251,17 @@
                         <p class="text-gray-300 text-sm mb-6 line-clamp-2">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, excepturi voluptatem.
                         </p>
-                        <div class="flex justify-between items-center">
-                            <button
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex flex-row-reverse justify-between items-center">
+                            <button onclick="addToCart(this)"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0">
+                                <svg class="w-5 h-5 text-white transition-transform duration-300" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                Add to Cart
+                                <span class="transition-all duration-300">Add to Cart</span>
                             </button>
+
                             <button class="p-2 hover:text-blue-400 transition-colors">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -283,15 +295,17 @@
                         <p class="text-gray-300 text-sm mb-6 line-clamp-2">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, excepturi voluptatem.
                         </p>
-                        <div class="flex justify-between items-center">
-                            <button
-                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex flex-row-reverse justify-between items-center">
+                            <button onclick="addToCart(this)"
+                                class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0">
+                                <svg class="w-5 h-5 text-white transition-transform duration-300" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                Add to Cart
+                                <span class="transition-all duration-300">Add to Cart</span>
                             </button>
+
                             <button class="p-2 hover:text-blue-400 transition-colors">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -318,6 +332,67 @@
                     class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all">Subscribe</button>
             </div>
         </form>
+    </div>
+
+    <!-- Cart Button -->
+    <div id="cartButton" class="fixed bottom-8 right-8 z-50">
+        <button class="cart-bubble group">
+            <div class="relative p-4 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span id="cartBubbleCounter" class="cart-counter">0</span>
+            </div>
+            <div class="cart-tooltip">View Cart</div>
+        </button>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="cartOverlay"></div>
+
+        <div
+            class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-gray-900 rounded-xl shadow-2xl p-6 opacity-0 scale-95 transition-all duration-300">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold text-white">Shopping Cart</h3>
+                <button id="closeCartModal"
+                    class="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-gray-800">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Cart Items Container -->
+            <div id="cartItems" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Cart items will be inserted here -->
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 pt-4 border-t border-gray-700">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-400">Total Items:</span>
+                    <span id="cartTotalItems" class="text-white font-semibold">0</span>
+                </div>
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-gray-400">Total Price:</span>
+                    <span id="cartTotalPrice" class="text-2xl text-white font-bold">$0.00</span>
+                </div>
+                <div class="flex gap-4">
+                    <button id="clearCart"
+                        class="flex-1 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                        Clear Cart
+                    </button>
+                    <button id="checkoutCart"
+                        class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="relative bg-[#101015] border-t border-[#222234] py-12 px-4 md:px-16 overflow-hidden">
@@ -379,7 +454,20 @@
         </div>
     </footer>
 
+    <script>
+        // Untuk memastikan cart tersedia secara global
+        window.addEventListener('load', () => {
+            if (!window.cart) {
+                console.log('Reinitializing cart...');
+                window.cart = new Cart();
+            }
+        });
+    </script>
     <script src="../src/script.js">
+    </script>
+    <script src="../src/logic/chart.js"></script>
+    <script>
+        AOS.init();
     </script>
 </body>
 
