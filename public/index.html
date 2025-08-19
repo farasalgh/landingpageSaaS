@@ -33,10 +33,9 @@
             class="hover:underline hover:text-gray-500 transition-all delay-150 duration-300 ease-in-out">Contact</a>
         </div>
 
-        <!-- Dark Mode Toggle (Desktop) -->
         <div class="hidden md:flex items-center space-x-4">
           <a href="" id="darkModeToggleDesktop"
-            class="p-2 px-8 py-2 rounded-full border border-blue-700 bg-[#181923] text-white text-sm font-semibold shadow-lg hover:bg-blue-600 delay-100 hover:border-blue-500 transition-all duration-150">
+            class="p-2 px-8 py-2 rounded-full border bg-blue-700 border-transparent text-white text-sm font-semibold shadow-lg hover:bg-transparent hover:text-blue-600 delay-100 hover:border-blue-500 transition-all duration-300 active:scale-95">
             Login
           </a>
         </div>
@@ -506,73 +505,98 @@
 
       <div class="flex-1 space-y-4">
 
-        <details
-          class="border border-gray-600 transition-all duration-300 delay-100 ease-in-out hover:border-blue-600 rounded-lg p-4 bg-transparent">
-          <summary class="cursor-pointer text-white font-medium">
-            What payment methods are available?
-          </summary>
-          <p class="mt-2 text-gray-400">
-            We accept credit/debit cards, bank transfers, PayPal, and Stripe.
-          </p>
-        </details>
-
-        <details
-          class="border border-gray-600 transition-all duration-300 delay-100 ease-in-out hover:border-blue-600 rounded-lg p-4 bg-transparent">
-          <summary class="cursor-pointer text-white font-medium">
-            How long will it take for my order to be delivered?
-          </summary>
-          <p class="mt-2 text-gray-400">
-            Delivery usually takes 3–5 business days depending on your location.
-          </p>
-        </details>
-
-        <details
-          class="border border-gray-600 transition-all duration-300 delay-100 ease-in-out hover:border-blue-600 rounded-lg p-4 bg-transparent">
-          <summary class="cursor-pointer text-white font-medium">
-            Can I return or exchange a product?
-          </summary>
-          <p class="mt-2 text-gray-400">
-            Yes, returns are accepted within 30 days of purchase.
-          </p>
-        </details>
-
-        <details
-          class="border border-gray-600 transition-all duration-300 delay-100 ease-in-out hover:border-blue-600 rounded-lg p-4 bg-transparent">
-          <summary class="cursor-pointer text-white font-medium">
-            How can I track my order?
-          </summary>
-          <p class="mt-2 text-gray-400">
-            You can track your order using the tracking link sent to your email.
-          </p>
-        </details>
-        <details
-          class="border border-gray-600 transition-all duration-300 delay-100 ease-in-out hover:border-blue-600 rounded-lg p-4 bg-transparent">
-          <summary class="cursor-pointer text-white font-medium">
-            How do I care for my garments to make them last?
-          </summary>
-          <p class="mt-2 text-gray-400">
-            Care instructions are provided on the label of each product. You can also find general garment care tips
-            here caretips.com.
-          </p>
-        </details>
-        <details
-          class="border border-gray-600 transition-all duration-300 delay-100 ease-in-out hover:border-blue-600 rounded-lg p-4 bg-transparent">
-          <summary class="cursor-pointer text-white font-medium">
-            Are there any discounts for first-time purchases?
-          </summary>
-          <p class="mt-2 text-gray-400">
-            Yes, Sign up for our newsletter to get 10% off your first order!
-          </p>
-        </details>
-        <details
-          class="border border-gray-600 transition-all duration-300 delay-100 ease-in-out hover:border-blue-600 rounded-lg p-4 bg-transparent">
-          <summary class="cursor-pointer text-white font-medium">
-            How do I find my correct size?
-          </summary>
-          <p class="mt-2 text-gray-400">
-            We provide a detailed size guide correctsize.com on each product page to help you find your perfect fit.
-          </p>
-        </details>
+         <div class="group group border border-gray-600 transition-all duration-300 ease-in-out hover:border-blue-600 rounded-lg bg-transparent">
+            <div class="cursor-pointer text-white font-medium flex justify-between items-center p-4 accordion-header">
+                <h4 class="font-semibold text-white">What payment methods are available?</h4>
+                <svg class="w-6 h-6 text-white transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div class="overflow-hidden transition-[max-height] duration-500 ease-in-out max-h-0 accordion-content">
+                <p class="mt-2 text-gray-400 p-4">
+                    We accept credit/debit cards, bank transfers, PayPal, Stripe.
+                </p>
+            </div>
+        </div>
+        
+        <div class="group border border-gray-600 transition-all duration-300 ease-in-out hover:border-blue-600 rounded-lg bg-transparent">
+            <div class="cursor-pointer text-white font-medium flex justify-between items-center p-4 accordion-header">
+                How long will it take for my order to be delivered?
+                <svg class="w-6 h-6 text-white transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div class="overflow-hidden transition-[max-height] duration-500 ease-in-out max-h-0 accordion-content">
+                <p class="mt-2 text-gray-400 p-4">
+                    Delivery times vary by location. Standard estimated delivery is 4 days. Please see our Shipping Policy page for more details.
+                </p>
+            </div>
+        </div>
+        <div class="group border border-gray-600 transition-all duration-300 ease-in-out hover:border-blue-600 rounded-lg bg-transparent">
+            <div class="cursor-pointer text-white font-medium flex justify-between items-center p-4 accordion-header">
+                Can I return or exchange a product?
+                <svg class="w-6 h-6 text-white transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div class="overflow-hidden transition-[max-height] duration-500 ease-in-out max-h-0 accordion-content">
+                <p class="mt-2 text-gray-400 p-4">
+                    Yes, we offer returns/exchanges within 7 of purchase. Please review our Returns & Exchanges Policy for full details
+                </p>
+            </div>
+        </div>
+        <div class="group border border-gray-600 transition-all duration-300 ease-in-out hover:border-blue-600 rounded-lg bg-transparent">
+            <div class="cursor-pointer text-white font-medium flex justify-between items-center p-4 accordion-header">
+                How can I track my order?
+                <svg class="w-6 h-6 text-white transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div class="overflow-hidden transition-[max-height] duration-500 ease-in-out max-h-0 accordion-content">
+                <p class="mt-2 text-gray-400 p-4">
+                    Once your order is shipped, you will receive an email with a tracking number. You can track your order directly on trackepacket.com.
+                </p>
+            </div>
+        </div>
+        <div class="group border border-gray-600 transition-all duration-300 ease-in-out hover:border-blue-600 rounded-lg bg-transparent">
+            <div class="cursor-pointer text-white font-medium flex justify-between items-center p-4 accordion-header">
+                How do I care for my garments to make them last?
+                <svg class="w-6 h-6 text-white transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div class="overflow-hidden transition-[max-height] duration-500 ease-in-out max-h-0 accordion-content">
+                <p class="mt-2 text-gray-400 p-4">
+                    Care instructions are provided on the label of each product. You can also find general garment care tips here caretips.com.
+                </p>
+            </div>
+        </div>
+        <div class="group border border-gray-600 transition-all duration-300 ease-in-out hover:border-blue-600 rounded-lg bg-transparent">
+            <div class="cursor-pointer text-white font-medium flex justify-between items-center p-4 accordion-header">
+                Are there any discounts for first-time purchases?
+                <svg class="w-6 h-6 text-white transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div class="overflow-hidden transition-[max-height] duration-500 ease-in-out max-h-0 accordion-content">
+                <p class="mt-2 text-gray-400 p-4">
+                    Yes, Sign up for our newsletter to get 10% off your first order!
+                </p>
+            </div>
+        </div>
+        <div class="group border border-gray-600 transition-all duration-300 ease-in-out hover:border-blue-600 rounded-lg bg-transparent">
+            <div class="cursor-pointer text-white font-medium flex justify-between items-center p-4 accordion-header">
+                How do I find my correct size?
+                <svg class="w-6 h-6 text-white transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div class="overflow-hidden transition-[max-height] duration-500 ease-in-out max-h-0 accordion-content">
+                <p class="mt-2 text-gray-400 p-4">
+                    We provide a detailed size guide correctsize.com on each product page to help you find your perfect fit.
+                </p>
+            </div>
+        </div>
 
       </div>
     </div>
