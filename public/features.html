@@ -27,32 +27,51 @@
           >
 
           <!-- Desktop Navigation Links -->
-          <div class="hidden md:flex justify-center gap-8 items-center text-white" id="navLinksContainer">
-          <a href="index.html"
-            class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out">Home</a>
-          <a href="#"
-            class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out">Features</a>
-          <a href="market.html"
-            class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out">Collection</a>
-          <a href="contact.html"
-            class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out">Contact</a>
-        </div>
+          <div
+            class="hidden md:flex justify-center gap-8 items-center text-white"
+            id="navLinksContainer"
+          >
+            <a
+              href="index.html"
+              class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+              >Home</a
+            >
+            <a
+              href="#"
+              class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+              >Features</a
+            >
+            <a
+              href="market.html"
+              class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+              >Collection</a
+            >
+            <a
+              href="contact.html"
+              class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+              >Contact</a
+            >
+          </div>
 
-        <div class="hidden md:flex items-center space-x-4">
-          <a href="" id="darkModeToggleDesktop"
-            class="p-2 px-8 py-2 rounded-full border bg-blue-700 border-transparent text-white text-sm font-semibold shadow-lg hover:bg-transparent hover:text-blue-600 delay-100 hover:border-blue-500 transition-all duration-300 active:scale-95">
-            Login
-          </a>
-        </div>
-          <!-- Mobile Menu Button -->
-          <a id="mobileMenuBtn" class="md:hidden p-2 rounded-lg">
-            <svg
+          <div class="hidden md:flex items-center space-x-4">
+            <a
               href=""
-              id="mobileMenuIcon"
+              id="darkModeToggleDesktop"
+              class="p-2 px-8 py-2 rounded-full border bg-blue-700 border-transparent text-white text-sm font-semibold shadow-lg hover:bg-transparent hover:text-blue-600 delay-100 hover:border-blue-500 transition-all duration-300 active:scale-95"
+            >
+              Login
+            </a>
+          </div>
+          <button
+            id="mobile-menu-button"
+            class="md:hidden p-2 rounded-lg text-white"
+          >
+            <svg
+              id="hamburger-icon"
               class="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="white"
+              stroke="currentColor"
             >
               <path
                 stroke-linecap="round"
@@ -61,25 +80,49 @@
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
-          </a>
+            <svg
+              id="close-icon"
+              class="h-6 w-6 hidden"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
       </div>
 
-      <!-- Mobile Menu Overlay -->
       <div
-        id="mobileMenu"
-        class="md:hidden shadow-lg border-t bg-white border-gray-100 hidden transition-all duration-300"
+        id="mobile-menu"
+        class="md:hidden bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 opacity-0"
       >
-        <div class="px-4 py-3 space-y-2" id="mobileNavLinksContainer">
-          <!-- Links will be inserted by JS -->
-        </div>
-        <div class="px-4 py-3">
-          <button
-            id="darkModeToggleMobile"
-            class="w-full px-4 py-3 rounded-lg transition-all flex items-center text-gray-700"
+        <div class="px-4 py-3 space-y-2">
+          <a
+            href="index.html"
+            class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+            >Home</a
           >
-            <!-- Label set by JS -->
-          </button>
+          <a
+            href="#"
+            class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:bg-blue-600 dark:hover:bg-gray-700/50"
+            >Features</a
+          >
+          <a
+            href="market.html"
+            class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+            >Collection</a
+          >
+          <a
+            href="contact.html"
+            class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+            >Contact</a
+          >
         </div>
       </div>
     </nav>
@@ -92,7 +135,7 @@
           class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm cursor-default"
           >Here features & advantages
         </span>
-        <h1 class="text-7xl text-white font-semibold cursor-default">
+        <h1 class="text-3xl md:text-7xl text-white font-semibold cursor-default">
           Check Out Our Featured Features
         </h1>
         <span class="mt-12 flex justify-center"></span>
@@ -124,14 +167,18 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div
-          class="bg-gray-800/50 p-6 rounded-lg shadow-lg text-white cursor-default hover:bg-gray-800 transition-all duration-500 delay-100 hover:shadow-blue-600
-           border border-transparent hover:border-blue-500"
+          class="bg-gray-800/50 p-6 rounded-lg shadow-lg text-white cursor-default hover:bg-gray-800 transition-all duration-500 delay-100 hover:shadow-blue-600 border border-transparent hover:border-blue-500"
         >
-        <div class="flex items-center gap-4 mb-4">
-            <img src="icon/bag.png" alt="Personal_Shopper" class="bg-blue-600 p-2 rounded-lg" width="70px">
+          <div class="flex items-center gap-4 mb-4">
+            <img
+              src="icon/bag.png"
+              alt="Personal_Shopper"
+              class="bg-blue-600 p-2 rounded-lg"
+              width="70px"
+            />
             <h3 class="text-xl font-semibold mb-2">Personal Shopper</h3>
-        </div>
-          
+          </div>
+
           <p class="mb-4">
             Get personalized product recommendations based on your shopping
             history, style preferences, and size.
@@ -151,16 +198,24 @@
         <div
           class="bg-gray-800/50 p-6 rounded-lg shadow-lg text-white cursor-default hover:bg-gray-800 transition-all duration-500 delay-100 border border-transparent hover:border-blue-500 hover:shadow-blue-600"
         >
-        <div class="flex items-center gap-4 mb-4">
-            <img src="icon/technology.png" class="bg-blue-600 p-2 rounded-lg" alt="" width="70px">
+          <div class="flex items-center gap-4 mb-4">
+            <img
+              src="icon/technology.png"
+              class="bg-blue-600 p-2 rounded-lg"
+              alt=""
+              width="70px"
+            />
             <h3 class="text-xl font-semibold mb-2">Virtual Try-On</h3>
-        </div>
-          
+          </div>
+
           <p class="mb-4">
-            Virtually try on clothes using augmented reality (AR) technology before you buy, just by using your smartphone's camera.
+            Virtually try on clothes using augmented reality (AR) technology
+            before you buy, just by using your smartphone's camera.
           </p>
           <p class="mb-4">
-            Reduces customer hesitation when shopping online, minimizes the likelihood of returns due to incorrect size or style, and provides a modern shopping experience.
+            Reduces customer hesitation when shopping online, minimizes the
+            likelihood of returns due to incorrect size or style, and provides a
+            modern shopping experience.
           </p>
           <div class="flex justify-end items-center">
             <a
@@ -173,17 +228,23 @@
         <div
           class="bg-gray-800/50 p-6 rounded-lg shadow-lg text-white cursor-default hover:bg-gray-800 transition-all duration-500 delay-100 border border-transparent hover:border-blue-500 hover:shadow-blue-600"
         >
-
-        <div class="flex items-center gap-4 mb-4">
-            <img src="icon/school.png" class="bg-blue-600 p-2 rounded-lg" alt="" width="70px">
+          <div class="flex items-center gap-4 mb-4">
+            <img
+              src="icon/school.png"
+              class="bg-blue-600 p-2 rounded-lg"
+              alt=""
+              width="70px"
+            />
             <h3 class="text-xl font-semibold mb-2">Custom Design Studio</h3>
-        </div>
-          
+          </div>
+
           <p class="mb-4">
-            Unleash your creativity! Design your own dream apparel from scratch, from choosing the fabric and color to adding custom text or images.
+            Unleash your creativity! Design your own dream apparel from scratch,
+            from choosing the fabric and color to adding custom text or images.
           </p>
           <p class="mb-4">
-            Offers unique and exclusive products, attracts customers looking for personalization, and creates a more interactive shopping experience.
+            Offers unique and exclusive products, attracts customers looking for
+            personalization, and creates a more interactive shopping experience.
           </p>
           <div class="flex justify-end items-center">
             <a
@@ -197,21 +258,32 @@
     </section>
 
     <!-- Section 3 -->
-     <section>
-        <div
+    <section>
+      <div
         class="flex flex-col items-center justify-center text-center pt-12 pb-24 px-4 overflow-hidden mb-5"
       >
         <h1 class="text-4xl text-white font-semibold cursor-default">
           Ready to Transform Your Wardrobe?
         </h1>
-        <p class="text-white mt-4">Start your personalized shopping journey today and discover styles you'll love.</p>
+        <p class="text-white mt-4">
+          Start your personalized shopping journey today and discover styles
+          you'll love.
+        </p>
         <span class="mt-12 flex justify-center"></span>
-        <div class="flex justify-around items-center w-1/2">
-            <a href="#" class="px-5 py-3 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-md hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-300 hover:text-blue-400 ease-in-out">Create My Free Account</a>
-            <a href="market.html" class="px-5 py-3 rounded-full border border-blue-700 bg-[#181923] text-white text-md font-semibold shadow-lg delay-100 hover:bg-blue-500 transition-all duration-300 ease-in-out">Explore All Collections</a>
+        <div class="flex flex-col w-full gap-6 md:justify-around md:items-center md:w-1/2">
+          <a
+            href="#"
+            class="px-2 md:px-5 py-2 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-md hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-300 hover:text-blue-400 ease-in-out"
+            >Create My Free Account</a
+          >
+          <a
+            href="market.html"
+            class="px-2 md:px-5 py-2 rounded-full border border-blue-700 bg-[#181923] text-white text-md font-semibold shadow-lg delay-100 hover:bg-blue-500 transition-all duration-300 ease-in-out"
+            >Explore All Collections</a
+          >
         </div>
       </div>
-     </section>
+    </section>
 
     <footer
       class="relative bg-[#101015] border-t border-[#222234] py-12 px-4 md:px-16 overflow-hidden"
@@ -334,5 +406,7 @@
         </div>
       </div>
     </footer>
+
+    <script src="main.js"></script>
   </body>
 </html>

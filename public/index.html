@@ -40,28 +40,25 @@
           </a>
         </div>
 
-        <!-- Mobile Menu Button -->
-        <a id="mobileMenuBtn" class="md:hidden p-2 rounded-lg">
-          <svg href="" id="mobileMenuIcon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </a>
-      </div>
-    </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-white">
+                    <svg id="hamburger-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg id="close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobileMenu"
-      class="md:hidden shadow-lg border-t bg-white border-gray-100 hidden transition-all duration-300">
-      <div class="px-4 py-3 space-y-2" id="mobileNavLinksContainer">
-        <!-- Links will be inserted by JS -->
-      </div>
-      <div class="px-4 py-3">
-        <button id="darkModeToggleMobile"
-          class="w-full px-4 py-3 rounded-lg transition-all flex items-center text-gray-700">
-          <!-- Label set by JS -->
-        </button>
-      </div>
-    </div>
+        <div id="mobile-menu" class="md:hidden bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 opacity-0">
+            <div class="px-4 py-3 space-y-2">
+                <a href="#" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 dark:bg-blue-600 hover:bg-gray-50 dark:hover:bg-gray-700/50">Home</a>
+                <a href="features.html" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50">Features</a>
+                <a href="market.html" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50">Collection</a>
+                <a href="contact.html" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50">Contact</a>
+            </div>
+        </div>
   </nav>
 
   <!-- Hero Section -->
@@ -133,10 +130,10 @@
     <!-- Buttons -->
     <div data-aos="zoom-in" class="flex flex-row gap-4 justify-center">
       <a href="market.html"
-        class="px-8 py-3 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-lg hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-150">Shop
+        class="px-4 md:px-8 py-3 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-lg hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-150">Shop
         Now</a>
       <a href="#"
-        class="px-8 py-3 rounded-full border border-blue-700 bg-[#181923] text-white text-lg font-semibold shadow-lg delay-100 hover:bg-blue-500 hover:border-blue-500 transition-all duration-150">Explore
+        class="px-4 md:px-8 py-3 rounded-full border border-blue-700 bg-[#181923] text-white text-lg font-semibold shadow-lg delay-100 hover:bg-blue-500 hover:border-blue-500 transition-all duration-150">Explore
         Collection</a>
     </div>
   </section>
@@ -158,7 +155,7 @@
           fill-opacity="0.45" />
       </svg>
     </span>
-    <div class="flex">
+    <div class="flex flex-col md:flex-row">
       <div class="max-w-3xl mx-7">
         <div data-aos="fade-right"
           class="inline-flex items-center px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-8 text-white text-sm font-medium shadow-sm">
@@ -175,7 +172,7 @@
           Our Features</a>
       </div>
 
-      <div data-aos="fade-left" class="grid grid-cols-2 gap-4">
+      <div data-aos="fade-left" class="grid grid-cols-1 md:grid-cols-2 mt-10 gap-4">
         <div
           class="card text-white border border-solid border-r-blue-300 border-l-blue-300 border-t-blue-500 border-b-blue-500 rounded-lg p-5 hover:-translate-y-1 hover:shadow-blue-600 shadow-lg transition-all duration-300 delay-100 cursor-default">
           <h2 class="font-bold">Trendy & Versatile</h2>
@@ -215,19 +212,19 @@
     </div>
 
     <div class="text-center" data-aos="fade-down">
-      <h2 class="text-white text-7xl md:text-6xl font-sm mb-4">
+      <h2 class="text-white text-3xl md:text-6xl font-sm mb-4">
         We dont just sell clothes -
         <br> we create a lifestyle.
       </h2>
     </div>
 
-    <div class="flex justify-around w-full  mt-10">
-      <img data-aos="fade-right" src="../public/static/image1.jpg" class="rounded-2xl w-[1200px]" alt="">
+    <div class="flex flex-col md:flex-row md:justify-around w-full  mt-10">
+      <img data-aos="fade-right" src="../public/static/image1.jpg" class="rounded-2xl md:h-full md:w-[1200px] h-[400px] w-[600px]" alt="">
       <div class="ml-7 " data-aos="fade-left">
         <span
           class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm">Fashion
           Insight</span>
-        <h3 class="text-7xl text-white">Stay Ahead of the Trends</h3>
+        <h3 class="text-3xl md:text-7xl text-white">Stay Ahead of the Trends</h3>
         <p class="text-white mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima enim ducimus, qui
           voluptas nemo aliquam eos nihil neque quia veniam? Magni aperiam porro nobis corrupti natus excepturi quas
           magnam nisi!</p>
@@ -239,16 +236,16 @@
 
       </div>
     </div>
-    <div class="flex flex-row-reverse justify-around w-full  mt-24">
+    <div class="flex flex-col md:flex-row-reverse md:justify-around w-full  mt-24">
 
       <img data-aos="fade-left" src="../public/static/image2.jpg" class="rounded-2xl w-[500px]" width="" alt="">
 
-      <div class="mr-7 text-right" data-aos="fade-right">
+      <div class="ml-7 md:mr-7 text-left md:text-right" data-aos="fade-right">
         <span
           class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm">Style
           Recommendations
         </span>
-        <h3 class="text-7xl text-white">Personalized Looks for Every Mood</h3>
+        <h3 class="text-3xl md:text-7xl text-white">Personalized Looks for Every Mood</h3>
         <p class="text-white mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima enim ducimus, qui
           voluptas nemo aliquam eos nihil neque quia veniam? Magni aperiam porro nobis corrupti natus excepturi quas
           magnam nisi!</p>
@@ -261,14 +258,14 @@
       </div>
     </div>
 
-    <div class="flex justify-around w-full  mt-24">
-      <img data-aos="fade-right" src="../public/static/image3.jpg" class="rounded-2xl w-[500px]" alt="">
+    <div class="flex flex-col md:flex-row justify-around w-full  mt-24">
+      <img data-aos="fade-right" src="../public/static/image3.jpg" class="rounded-2xl w-[500px] h-[400px] md:h-full" alt="">
       <div class="ml-7" data-aos="fade-left">
         <span
           class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm">Community
           Highlights
         </span>
-        <h3 class="text-7xl text-white">See How Others Wear It</h3>
+        <h3 class="text-3xl md:text-7xl text-white">See How Others Wear It</h3>
         <p class="text-white mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima enim ducimus, qui
           voluptas nemo aliquam eos nihil neque quia veniam? Magni aperiam porro nobis corrupti natus excepturi quas
           magnam nisi!</p>
@@ -290,13 +287,13 @@
     </div>
 
     <div class="text-center" data-aos="fade-down">
-      <h2 class="text-white text-7xl md:text-5xl font-sm mb-7">
+      <h2 class="text-white text-3xl md:text-7xl font-sm mb-7">
         Hear From Our Happy
         <br> Customers: Their Style Stories
       </h2>
     </div>
 
-    <div class="grid grid-cols-3 gap-4 mt-5 ml-5 mr-5 mb-5 " data-aos="zoom-in-down">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5 ml-5 mr-5 mb-5 " data-aos="zoom-in-down">
       <div
         class="bg-gray-900 p-5 rounded-4xl backdrop-blur-sm hover:-translate-y-1 shadow-lg transition-all duration-300 delay-100 cursor-default">
         <div class="profile flex gap-3 items-center">
@@ -484,7 +481,6 @@
 
   <!-- FAQ Section -->
   <section class="py-20 px-4 bg-[#101015] overflow-hidden cursor-default">
-
 
     <div class="flex flex-col md:flex-row gap-20 px-4 md:px-16 mb-20">
 
