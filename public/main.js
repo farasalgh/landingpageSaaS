@@ -82,6 +82,31 @@ document.addEventListener("DOMContentLoaded", function () {
   handleScroll();
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. Pilih SEMUA tombol yang memiliki class '.love-button'
+  // querySelectorAll akan mengembalikan sebuah daftar (NodeList)
+  const allLoveButtons = document.querySelectorAll(".love-button");
+
+  // 2. Lakukan perulangan untuk setiap tombol yang ditemukan
+  allLoveButtons.forEach((button) => {
+    // 3. Tambahkan event listener ke SETIAP tombol satu per satu
+    button.addEventListener("click", function () {
+      // 4. Cari ikon yang ada DI DALAM tombol yang sedang diklik ini
+      const heartIcon = button.querySelector(".heart-icon");
+
+      // 5. Toggle kelas pada ikon yang spesifik tersebut
+      heartIcon.classList.toggle("fill-pink-500");
+      heartIcon.classList.toggle("text-pink-500");
+
+      // (Opsional) Efek denyut pada tombol yang diklik
+      button.classList.add("scale-125");
+      setTimeout(() => {
+        button.classList.remove("scale-125");
+      }, 150);
+    });
+  });
+});
+
 // --- FAQ Accordion Animation
 document.addEventListener("DOMContentLoaded", () => {
   const accordionHeaders = document.querySelectorAll(".accordion-header");
