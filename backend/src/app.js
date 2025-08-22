@@ -1,14 +1,23 @@
+// backend/src/app.js
+
 const express = require('express');
 const cors = require('cors');
 const userRoutes = require('./routes/user.routes');
-const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
+// Middleware
+app.use(cors());
+app.use(express.json()); 
+
+// Routes
 app.use('/api/users', userRoutes);
 
-app.use(errorHandler);
+// === TAMBAHKAN KODE INI ===
+// Rute dasar untuk pengetesan
+app.get('/', (req, res) => {
+  res.status(200).send('Selamat datang di API backend saya! Server berjalan dengan baik.');
+});
+// ==========================
 
 module.exports = app;
