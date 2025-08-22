@@ -67,17 +67,14 @@ exports.login = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   try {
-    // Karena middleware sudah memverifikasi, kita bisa langsung mengambil email dari req.userData
     const userEmail = req.userData.email;
 
-    // Cari pengguna berdasarkan email untuk mendapatkan data lengkap (jika perlu)
     const user = await User.findByEmail(userEmail);
 
     if (!user) {
       return res.status(404).json({ message: "Pengguna tidak ditemukan." });
     }
-
-    // Kirim data pengguna (tanpa password)
+    
     res.status(200).json({
       id: user.id,
       email: user.email,

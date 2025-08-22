@@ -1,28 +1,17 @@
 // Validation User
 (function() {
-    // Ambil path halaman saat ini
     const currentPage = window.location.pathname.split('/').pop();
     
-    // Halaman yang tidak memerlukan login (halaman publik)
-    const publicPages = ['login.html', 'register.html']; // Tambahkan halaman lain jika perlu
 
-    // Cek apakah token ada di localStorage
+    const publicPages = ['login.html', 'register.html'];
     const authToken = localStorage.getItem('authToken');
 
     if (authToken) {
-        // --- PENGGUNA SUDAH LOGIN ---
-        
-        // Jika pengguna sudah login tapi mencoba mengakses halaman login/register,
-        // arahkan mereka ke halaman utama.
         if (publicPages.includes(currentPage)) {
             console.log('Sudah login, mengarahkan ke index.html...');
             window.location.href = 'index.html';
         }
     } else {
-        // --- PENGGUNA BELUM LOGIN ---
-        
-        // Jika pengguna belum login dan mencoba mengakses halaman yang bukan publik,
-        // paksa mereka ke halaman login.
         if (!publicPages.includes(currentPage)) {
             console.log('Belum login, mengarahkan ke login.html...');
             window.location.href = 'login.html';
@@ -41,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event listener untuk form registrasi
   if (registerForm) {
     registerForm.addEventListener('submit', async (e) => {
-      e.preventDefault(); // Mencegah form dari reload halaman
+      e.preventDefault();
       
       const email = document.getElementById('registerEmail').value;
       const password = document.getElementById('registerPassword').value;
@@ -95,13 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(data.message || 'Gagal login');
             }
 
-            // Simpan token ke localStorage untuk digunakan nanti
             localStorage.setItem('authToken', data.token);
 
             loginMessage.style.color = 'green';
             loginMessage.textContent = 'Login berhasil! Anda akan diarahkan...';
             
-            // Contoh: Arahkan ke halaman dashboard setelah berhasil login
              window.location.href = 'index.html';
 
         } catch (error) {
@@ -115,19 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // Logout
 const logoutButton = document.getElementById('logout-button');
 
-// Pastikan tombolnya ada sebelum menambahkan event listener
 if (logoutButton) {
     logoutButton.addEventListener('click', (event) => {
-        // Mencegah link berpindah halaman secara default
         event.preventDefault(); 
 
-        // 1. Hapus token dari localStorage
         localStorage.removeItem('authToken');
 
-        // 2. Beri pesan konfirmasi (opsional, tapi bagus untuk UX)
         alert('Anda telah berhasil logout.');
 
-        // 3. Arahkan pengguna kembali ke halaman login
         window.location.href = 'login.html'; 
     });
 }
