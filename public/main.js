@@ -173,3 +173,49 @@ document.addEventListener("DOMContentLoaded", () => {
     .bindPopup("<b>Apparels 16</b><br>Toko Baju Terbaik di Kota Ini.")
     .openPopup();
 });
+
+// EmailJS-Send
+(function () {
+  emailjs.init({
+    publicKey: "NYZE6VMcHdNBG8Nkz",
+  });
+})();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const contactForm = document.getElementById("contact-form");
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.innerHTML;
+
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    submitButton.innerHTML = "Sending...";
+    submitButton.disabled = true;
+
+    const serviceID = "service_k9z65yp";
+    const templateID = "template_n2u8isc";
+
+    // Kirim form menggunakan EmailJS
+    emailjs.sendForm(serviceID, templateID, this).then(
+      () => {
+        submitButton.innerHTML = "Message Sent!";
+        alert("Pesan Anda telah berhasil dikirim!");
+        contactForm.reset(); // Mengosongkan form
+        setTimeout(() => {
+          submitButton.innerHTML = originalButtonText;
+          submitButton.disabled = false;
+        }, 3000); // Kembalikan teks tombol setelah 3 detik
+      },
+      (err) => {
+        submitButton.innerHTML = "Send Failed";
+        alert(
+          "Gagal mengirim pesan. Silakan coba lagi.\n" + JSON.stringify(err)
+        );
+        setTimeout(() => {
+          submitButton.innerHTML = originalButtonText;
+          submitButton.disabled = false;
+        }, 3000);
+      }
+    );
+  });
+});
