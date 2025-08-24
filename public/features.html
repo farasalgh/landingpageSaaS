@@ -295,36 +295,33 @@
 
     <!-- Section 3 -->
     <section>
-      <div
-        class="flex flex-col items-center justify-center text-center pt-12 pb-24 px-4 overflow-hidden mb-5"
-      >
-        <h1
-          data-aos="zoom-in"
-          class="text-4xl text-white font-semibold cursor-default"
-        >
-          Ready to Transform Your Wardrobe?
-        </h1>
-        <p data-aos="zoom-in" class="text-white mt-4">
-          Start your personalized shopping journey today and discover styles
-          you'll love.
-        </p>
-        <span class="mt-12 flex justify-center"></span>
-        <div
-          class="flex flex-col md:flex-row w-full gap-6 md:justify-around md:items-center md:w-1/2"
-        >
-          <a
-            data-aos="fade-left"
-            href="#"
-            class="px-2 md:px-5 py-2 bg-blue-500 delay-100 border-blue-600 rounded-full bg-gradient-to-r text-white text-md hover:bg-[#181923] hover:border-blue-600 border border-solid font-semibold shadow-lg transition-all duration-300 hover:text-blue-400 ease-in-out"
-            >Create My Free Account</a
-          >
-          <a
-            data-aos="fade-right"
-            href="market.html"
-            class="px-2 md:px-5 py-2 rounded-full border border-blue-700 bg-[#181923] text-white text-md font-semibold shadow-lg delay-100 hover:bg-blue-500 transition-all duration-300 ease-in-out"
-            >Explore All Collections</a
-          >
+      <div class="container mt-24 mb-24 mx-auto px-4 py-12">
+        <div class="text-center mb-8">
+          <h2 class="text-4xl text-white font-semibold">Join Our Community</h2>
+          <p class="text-gray-400 mt-4">
+            Stay updated with the latest trends and offers.
+          </p>
         </div>
+        <form id="subscribe-form" class="max-w-md mx-auto">
+          <div class="flex flex-col md:flex-row gap-4">
+            <input
+              type="email"
+              id="email-subscribe"
+              name="EMAIL"
+              placeholder="Enter your email"
+              class="flex-grow px-4 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              required
+            />
+            <button
+              type="submit"
+              class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
+            >
+              Subscribe
+            </button>
+          </div>
+        </form>
+
+        <div id="subscribe-message" class="mt-4 text-white"></div>
       </div>
     </section>
 

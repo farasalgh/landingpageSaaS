@@ -1,3 +1,18 @@
+// init
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM Loaded. Initializing page-specific scripts...");
+
+  if (document.getElementById("contact-form")) {
+    initContactForm();
+  }
+
+  if (document.getElementById("mapid")) {
+    initLeafletMap();
+  }
+});
+
+
+// navbar
 document.addEventListener("DOMContentLoaded", function () {
   const navbar = document.querySelector("nav");
   const logo = document.getElementById("logo");
@@ -76,43 +91,33 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // User Profile Dropdown
-// Ambil elemen tombol dan dropdown dari HTML
 const profileButton = document.getElementById("profile-button");
 const profileDropdown = document.getElementById("profile-dropdown");
 
-// Variabel untuk animasi (agar lebih mulus)
 let isDropdownOpen = false;
 
-// Fungsi untuk menampilkan/menyembunyikan dropdown
 const toggleDropdown = () => {
   isDropdownOpen = !isDropdownOpen;
   if (isDropdownOpen) {
-    // Tampilkan dropdown dan mulai animasi "enter"
     profileDropdown.classList.remove("hidden");
-    // Sedikit jeda agar browser sempat me-render sebelum animasi dimulai
     requestAnimationFrame(() => {
       profileDropdown.classList.remove("opacity-0", "scale-95");
       profileDropdown.classList.add("opacity-100", "scale-100");
     });
   } else {
-    // Mulai animasi "leave"
     profileDropdown.classList.remove("opacity-100", "scale-100");
     profileDropdown.classList.add("opacity-0", "scale-95");
-    // Sembunyikan elemen setelah animasi selesai
     setTimeout(() => {
       profileDropdown.classList.add("hidden");
-    }, 200); // Durasi harus cocok dengan durasi transisi
+    }, 200);
   }
 };
 
-// Tambahkan event listener saat tombol profil di-klik
 profileButton.addEventListener("click", (event) => {
-  // Mencegah event "klik di luar" tertrigger secara bersamaan
   event.stopPropagation();
   toggleDropdown();
 });
 
-// Tambahkan event listener untuk menutup dropdown saat klik di luar area menu
 window.addEventListener("click", (event) => {
   if (
     isDropdownOpen &&
@@ -147,21 +152,53 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function initContactForm() {
+  console.log("Contact form found, initializing EmailJS...");
+  
+  const contactForm = document.getElementById("contact-form");
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.innerHTML;
+
+  emailjs.init({ publicKey: "NYZE6VMcHdNBG8Nkz" });
+
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    submitButton.innerHTML = "Sending...";
+    submitButton.disabled = true;
+
+    const serviceID = "service_k9z65yp";
+    const templateID = "template_n2u8isc";
+
+    emailjs.sendForm(serviceID, templateID, this)
+      .then(() => {
+        alert("Pesan Anda telah berhasil dikirim!");
+        contactForm.reset();
+      }, (err) => {
+        alert("Gagal mengirim pesan. Silakan coba lagi.\n" + JSON.stringify(err));
+      })
+      .finally(() => {
+        setTimeout(() => {
+          submitButton.innerHTML = originalButtonText;
+          submitButton.disabled = false;
+        }, 2000);
+      });
+  });
+}
+
 // Map
-document.addEventListener("DOMContentLoaded", () => {
+function initLeafletMap() {
+  console.log("Map container found, initializing Leaflet...");
+  
   const myLocation = [-5.11218, 105.18437];
   const mymap = L.map("mapid").setView(myLocation, 16);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution:
-      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(mymap);
 
   const redIcon = new L.Icon({
-    iconUrl:
-      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
-    shadowUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconUrl: "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -172,50 +209,80 @@ document.addEventListener("DOMContentLoaded", () => {
     .addTo(mymap)
     .bindPopup("<b>Apparels 16</b><br>Toko Baju Terbaik di Kota Ini.")
     .openPopup();
-});
+}
 
-// EmailJS-Send
-(function () {
-  emailjs.init({
-    publicKey: "NYZE6VMcHdNBG8Nkz",
-  });
-})();
+// Email Subscription
+function setupSubscriptionForm() {
+    console.log("Checkpoint 2: Mencoba mencari form subscribe di halaman ini.");
+    const subscribeForm = document.getElementById("subscribe-form");
+    
+    if (!subscribeForm) {
+        return; 
+    }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const contactForm = document.getElementById("contact-form");
-  const submitButton = contactForm.querySelector('button[type="submit"]');
-  const originalButtonText = submitButton.innerHTML;
+    console.log("Checkpoint 3: BERHASIL - Form ditemukan!", subscribeForm);
+    
+    const emailInput = document.getElementById("email-subscribe");
+    const messageDiv = document.getElementById("subscribe-message");
+    const submitButton = subscribeForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerText;
 
-  contactForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+    subscribeForm.addEventListener("submit", function (event) {
+        console.log("Checkpoint 4: Tombol subscribe diklik! Mencegah submit tradisional...");
+        event.preventDefault();
+        
+        const email = emailInput.value;
+        const mailchimpUrl = 'https://gmail.us1.list-manage.com/subscribe/post?u=c5e3d99ba6b868f474e78ba43&id=cfe1309cbc&f_id=00a927e1f0'
+                              .replace('/post?', '/post-json?');
 
-    submitButton.innerHTML = "Sending...";
-    submitButton.disabled = true;
+        if (!email || !email.includes('@')) {
+            messageDiv.innerText = "Please enter a valid email address.";
+            messageDiv.style.color = "red";
+            return;
+        }
 
-    const serviceID = "service_k9z65yp";
-    const templateID = "template_n2u8isc";
+        const url = `${mailchimpUrl}&${emailInput.name}=${encodeURIComponent(email)}`;
+        
+        console.log("Checkpoint 5: Mengirim data ke URL:", url);
 
-    // Kirim form menggunakan EmailJS
-    emailjs.sendForm(serviceID, templateID, this).then(
-      () => {
-        submitButton.innerHTML = "Message Sent!";
-        alert("Pesan Anda telah berhasil dikirim!");
-        contactForm.reset(); // Mengosongkan form
-        setTimeout(() => {
-          submitButton.innerHTML = originalButtonText;
-          submitButton.disabled = false;
-        }, 3000); // Kembalikan teks tombol setelah 3 detik
-      },
-      (err) => {
-        submitButton.innerHTML = "Send Failed";
-        alert(
-          "Gagal mengirim pesan. Silakan coba lagi.\n" + JSON.stringify(err)
-        );
-        setTimeout(() => {
-          submitButton.innerHTML = originalButtonText;
-          submitButton.disabled = false;
-        }, 3000);
-      }
-    );
-  });
-});
+        submitButton.innerText = "Subscribing...";
+        submitButton.disabled = true;
+
+        jsonp(url, { param: "c" }, (err, data) => {
+            submitButton.innerText = originalButtonText;
+            submitButton.disabled = false;
+
+            if (err) {
+                messageDiv.innerText = "An error occurred. Please try again.";
+                messageDiv.style.color = "red";
+                console.error("Error dari JSONP:", err);
+            } else if (data.result === "success") {
+                messageDiv.innerText = data.msg;
+                messageDiv.style.color = "green";
+                subscribeForm.reset();
+            } else {
+                let cleanMsg = data.msg.replace(/^\d+ - /, "");
+                messageDiv.innerText = cleanMsg;
+                messageDiv.style.color = "red";
+            }
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", setupSubscriptionForm);
+
+function jsonp(url, options, callback) {
+    const callbackName = "jsonp_callback_" + Math.round(100000 * Math.random());
+    const script = document.createElement("script");
+
+    window[callbackName] = function (data) {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        callback(null, data);
+    };
+
+    const param = options.param || "callback";
+    script.src = `${url}&${param}=${callbackName}`;
+    script.onerror = () => callback(new Error("JSONP request failed"));
+    document.body.appendChild(script);
+}
