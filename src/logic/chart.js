@@ -123,9 +123,24 @@ class Cart {
       this.showNotification("Your cart is empty!", "error");
       return;
     }
-    // Implement checkout logic here
-    this.showNotification("Checkout process initiated!");
+
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      this.showNotification("You must be logged in to checkout!", "error");
+      setTimeout(() => {
+        window.location.href = '../../public/login.html';
+      }, 1500);
+      return;
+    }
+    
+    localStorage.setItem('cartForCheckout', JSON.stringify(this.items));
+
+    this.showNotification("Redirecting to checkout...", "success");
+    setTimeout(() => {
+        window.location.href = '../../../landingpageSaaS/public/checkout.html'; 
+    }, 1000);
   }
+
 
   saveToLocalStorage() {
     localStorage.setItem("cart", JSON.stringify(this.items));
@@ -372,9 +387,7 @@ window.addToCart = function(button) {
     }
 };
 
-// Inisialisasi cart saat DOM loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Hanya inisialisasi cart sekali
   if (!window.cart) {
     window.cart = new Cart();
   }

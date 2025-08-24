@@ -1,7 +1,27 @@
+checkAuthStatus();
+
+function checkAuthStatus() {
+  const authToken = localStorage.getItem("authToken");
+  const publicPages = ["login.html", "register.html"];
+  let currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+  if (!authToken) {
+    if (!publicPages.includes(currentPage)) {
+      console.log(
+        "Akses ditolak! Anda belum login. Mengarahkan ke halaman login..."
+      );
+      window.location.href = "login.html";
+    }
+  }
+  else {
+    if (publicPages.includes(currentPage)) {
+      window.location.href = "index.html";
+    }
+  }
+}
+
 // init
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM Loaded. Initializing page-specific scripts...");
-
   if (document.getElementById("contact-form")) {
     initContactForm();
   }
@@ -11,14 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
 // navbar
 document.addEventListener("DOMContentLoaded", function () {
   const navbar = document.querySelector("nav");
   const logo = document.getElementById("logo");
   const navLinksContainer = document.getElementById("navLinksContainer");
 
-  // Elemen-elemen khusus untuk Menu Mobile
   const mobileMenu = document.getElementById("mobile-menu");
   const mobileMenuButton = document.getElementById("mobile-menu-button");
   const hamburgerIcon = document.getElementById("hamburger-icon");
@@ -93,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // User Profile Dropdown
 const profileButton = document.getElementById("profile-button");
 const profileDropdown = document.getElementById("profile-dropdown");
+const logoutButton = document.getElementById("logout-button");
 
 let isDropdownOpen = false;
 
@@ -117,6 +136,15 @@ profileButton.addEventListener("click", (event) => {
   event.stopPropagation();
   toggleDropdown();
 });
+
+if (logoutButton) {
+  logoutButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    localStorage.removeItem("authToken");
+    alert("Anda telah berhasil logout.");
+    window.location.href = "login.html";
+  });
+}
 
 window.addEventListener("click", (event) => {
   if (
@@ -153,8 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initContactForm() {
-  console.log("Contact form found, initializing EmailJS...");
-  
   const contactForm = document.getElementById("contact-form");
   const submitButton = contactForm.querySelector('button[type="submit"]');
   const originalButtonText = submitButton.innerHTML;
@@ -169,13 +195,19 @@ function initContactForm() {
     const serviceID = "service_k9z65yp";
     const templateID = "template_n2u8isc";
 
-    emailjs.sendForm(serviceID, templateID, this)
-      .then(() => {
-        alert("Pesan Anda telah berhasil dikirim!");
-        contactForm.reset();
-      }, (err) => {
-        alert("Gagal mengirim pesan. Silakan coba lagi.\n" + JSON.stringify(err));
-      })
+    emailjs
+      .sendForm(serviceID, templateID, this)
+      .then(
+        () => {
+          alert("Pesan Anda telah berhasil dikirim!");
+          contactForm.reset();
+        },
+        (err) => {
+          alert(
+            "Gagal mengirim pesan. Silakan coba lagi.\n" + JSON.stringify(err)
+          );
+        }
+      )
       .finally(() => {
         setTimeout(() => {
           submitButton.innerHTML = originalButtonText;
@@ -187,18 +219,19 @@ function initContactForm() {
 
 // Map
 function initLeafletMap() {
-  console.log("Map container found, initializing Leaflet...");
-  
   const myLocation = [-5.11218, 105.18437];
   const mymap = L.map("mapid").setView(myLocation, 16);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution:
+      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(mymap);
 
   const redIcon = new L.Icon({
-    iconUrl: "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
-    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconUrl:
+      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -213,76 +246,80 @@ function initLeafletMap() {
 
 // Email Subscription
 function setupSubscriptionForm() {
-    console.log("Checkpoint 2: Mencoba mencari form subscribe di halaman ini.");
-    const subscribeForm = document.getElementById("subscribe-form");
-    
-    if (!subscribeForm) {
-        return; 
+  const subscribeForm = document.getElementById("subscribe-form");
+
+  if (!subscribeForm) {
+    return;
+  }
+
+  const emailInput = document.getElementById("email-subscribe");
+  const messageDiv = document.getElementById("subscribe-message");
+  const submitButton = subscribeForm.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.innerText;
+
+  subscribeForm.addEventListener("submit", function (event) {
+    console.log(
+      "Checkpoint 4: Tombol subscribe diklik! Mencegah submit tradisional..."
+    );
+    event.preventDefault();
+
+    const email = emailInput.value;
+    const mailchimpUrl =
+      "https://gmail.us1.list-manage.com/subscribe/post?u=c5e3d99ba6b868f474e78ba43&id=cfe1309cbc&f_id=00a927e1f0".replace(
+        "/post?",
+        "/post-json?"
+      );
+
+    if (!email || !email.includes("@")) {
+      messageDiv.innerText = "Please enter a valid email address.";
+      messageDiv.style.color = "red";
+      return;
     }
 
-    console.log("Checkpoint 3: BERHASIL - Form ditemukan!", subscribeForm);
-    
-    const emailInput = document.getElementById("email-subscribe");
-    const messageDiv = document.getElementById("subscribe-message");
-    const submitButton = subscribeForm.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerText;
+    const url = `${mailchimpUrl}&${emailInput.name}=${encodeURIComponent(
+      email
+    )}`;
 
-    subscribeForm.addEventListener("submit", function (event) {
-        console.log("Checkpoint 4: Tombol subscribe diklik! Mencegah submit tradisional...");
-        event.preventDefault();
-        
-        const email = emailInput.value;
-        const mailchimpUrl = 'https://gmail.us1.list-manage.com/subscribe/post?u=c5e3d99ba6b868f474e78ba43&id=cfe1309cbc&f_id=00a927e1f0'
-                              .replace('/post?', '/post-json?');
+    console.log("Checkpoint 5: Mengirim data ke URL:", url);
 
-        if (!email || !email.includes('@')) {
-            messageDiv.innerText = "Please enter a valid email address.";
-            messageDiv.style.color = "red";
-            return;
-        }
+    submitButton.innerText = "Subscribing...";
+    submitButton.disabled = true;
 
-        const url = `${mailchimpUrl}&${emailInput.name}=${encodeURIComponent(email)}`;
-        
-        console.log("Checkpoint 5: Mengirim data ke URL:", url);
+    jsonp(url, { param: "c" }, (err, data) => {
+      submitButton.innerText = originalButtonText;
+      submitButton.disabled = false;
 
-        submitButton.innerText = "Subscribing...";
-        submitButton.disabled = true;
-
-        jsonp(url, { param: "c" }, (err, data) => {
-            submitButton.innerText = originalButtonText;
-            submitButton.disabled = false;
-
-            if (err) {
-                messageDiv.innerText = "An error occurred. Please try again.";
-                messageDiv.style.color = "red";
-                console.error("Error dari JSONP:", err);
-            } else if (data.result === "success") {
-                messageDiv.innerText = data.msg;
-                messageDiv.style.color = "green";
-                subscribeForm.reset();
-            } else {
-                let cleanMsg = data.msg.replace(/^\d+ - /, "");
-                messageDiv.innerText = cleanMsg;
-                messageDiv.style.color = "red";
-            }
-        });
+      if (err) {
+        messageDiv.innerText = "An error occurred. Please try again.";
+        messageDiv.style.color = "red";
+        console.error("Error dari JSONP:", err);
+      } else if (data.result === "success") {
+        messageDiv.innerText = data.msg;
+        messageDiv.style.color = "green";
+        subscribeForm.reset();
+      } else {
+        let cleanMsg = data.msg.replace(/^\d+ - /, "");
+        messageDiv.innerText = cleanMsg;
+        messageDiv.style.color = "red";
+      }
     });
+  });
 }
 
 document.addEventListener("DOMContentLoaded", setupSubscriptionForm);
 
 function jsonp(url, options, callback) {
-    const callbackName = "jsonp_callback_" + Math.round(100000 * Math.random());
-    const script = document.createElement("script");
+  const callbackName = "jsonp_callback_" + Math.round(100000 * Math.random());
+  const script = document.createElement("script");
 
-    window[callbackName] = function (data) {
-        delete window[callbackName];
-        document.body.removeChild(script);
-        callback(null, data);
-    };
+  window[callbackName] = function (data) {
+    delete window[callbackName];
+    document.body.removeChild(script);
+    callback(null, data);
+  };
 
-    const param = options.param || "callback";
-    script.src = `${url}&${param}=${callbackName}`;
-    script.onerror = () => callback(new Error("JSONP request failed"));
-    document.body.appendChild(script);
+  const param = options.param || "callback";
+  script.src = `${url}&${param}=${callbackName}`;
+  script.onerror = () => callback(new Error("JSONP request failed"));
+  document.body.appendChild(script);
 }
