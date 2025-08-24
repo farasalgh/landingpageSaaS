@@ -7,7 +7,7 @@
   <title>Apparels16</title>
   <link rel="stylesheet" href="../src/input.css" />
   <link rel="stylesheet" href="../src/output.css" />
-  <script src="connection.js" defer></script>
+  <script src="script/connection.js" defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -54,19 +54,39 @@
           class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
           >Contact</a
         >
+        <a 
+          href="/public/admin/dashboard.html" 
+          class="admin-panel-link hidden hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+        >Admin Panel</a>
       </div>
 
-      <div class="relative">
-          <div id="profile-button" class="hidden md:flex md:rounded-full md:p-3 items-center space-x-4">
-              <i class="fa-solid fa-user text-blue-600 fa-2x hover:text-white transition-all duration-300 delay-75 ease-in-out cursor-pointer"></i>
-          </div>
-          <div id="profile-dropdown" class="absolute right-0 mt-2 w-48 bg-transparent border border-blue-600 text-blue-600 rounded-md shadow-lg py-1 z-20 hidden transition ease-out duration-200 transform opacity-0 scale-95">
-              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-900">Profil Anda</a>
-              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-900">Pengaturan</a>
+      <div class="hidden md:relative md:block">
+            <div
+              id="profile-button"
+              class="hidden md:flex md:rounded-full md:p-3 items-center space-x-4"
+            >
+              <i
+                class="fa-solid fa-user text-blue-600 fa-2x hover:text-white transition-all duration-300 delay-75 ease-in-out cursor-pointer"
+              ></i>
+            </div>
+            <div
+              id="profile-dropdown"
+              class="absolute right-0 mt-2 w-48 bg-transparent border border-blue-600 text-blue-600 rounded-md shadow-lg py-1 z-20 hidden transition ease-out duration-200 transform opacity-0 scale-95"
+            >
+              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-900"
+                >Profil Anda</a
+              >
+              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-900"
+                >Pengaturan</a
+              >
               <div class="border-t border-gray-bg-gray-900"></div>
-              <a href="#" id="logout-button" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+              <a
+                href="#"
+                class="logout-button block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Logout</a
+              >
+            </div>
           </div>
-      </div>
 
       <button
         id="mobile-menu-button"
@@ -110,6 +130,24 @@
                 <a href="features.html" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50">Features</a>
                 <a href="market.html" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50">Collection</a>
                 <a href="contact.html" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 dark:bg-blue-60 hover:bg-gray-50 dark:hover:bg-gray-700/50">Contact</a>
+                <a 
+                  href="/public/admin/dashboard.html" 
+                  class="admin-panel-link nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                >Admin Panel</a>
+                <div class="border-t border-gray-700"></div>
+
+        <div id="mobile-user-menu" class="hidden px-4 py-3 space-y-2">
+          <a
+            href="#"
+            class="nav-link block px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700/50"
+            >Profil Anda</a
+          >
+          <a
+            href="#"
+            class="logout-button nav-link block px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/20"
+            >Logout</a
+          >
+        </div>
             </div>
         </div>
 </nav>
@@ -711,7 +749,7 @@
       </div>
     </div>
   </footer>
-  <script src="main.js"></script>
+  <script src="script/main.js"></script>
   <script>
     AOS.init();
   </script>

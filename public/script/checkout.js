@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${authToken}` // Kirim token!
+                    'Authorization': `Bearer ${authToken}`
                 },
                 body: JSON.stringify(orderPayload)
             });
@@ -55,10 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(result.message || 'Gagal membuat pesanan.');
             }
 
-            alert('Pesanan Anda berhasil dibuat!');
             localStorage.removeItem('cartForCheckout');
             localStorage.removeItem('shoppingCart');
-            window.location.href = `order-success.html?orderId=${result.orderId}`;
+            window.location.href = `/public/order-success.html?orderId=${result.orderId}`;
         } catch (error) {
             alert(error.message);
             submitButton.innerText = 'Place Order';

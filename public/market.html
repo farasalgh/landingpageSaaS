@@ -61,9 +61,14 @@
               class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
               >Contact</a
             >
+            <a
+              href="/public/admin/dashboard.html"
+              class="admin-panel-link hidden hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+              >Admin Panel</a
+            >
           </div>
 
-          <div class="relative">
+          <div class="hidden md:relative md:block">
             <div
               id="profile-button"
               class="hidden md:flex md:rounded-full md:p-3 items-center space-x-4"
@@ -85,8 +90,7 @@
               <div class="border-t border-gray-bg-gray-900"></div>
               <a
                 href="#"
-                id="logout-button"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                class="logout-button block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >Logout</a
               >
             </div>
@@ -153,6 +157,24 @@
             class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 dark:bg-blue-60 hover:bg-gray-50 dark:hover:bg-gray-700/50"
             >Contact</a
           >
+          <a 
+                  href="/public/admin/dashboard.html" 
+                  class="admin-panel-link nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                >Admin Panel</a>
+          <div class="border-t border-gray-700"></div>
+
+          <div id="mobile-user-menu" class="hidden px-4 py-3 space-y-2">
+            <a
+              href="#"
+              class="nav-link block px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700/50"
+              >Profil Anda</a
+            >
+            <a
+              href="#"
+              class="logout-button nav-link block px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/20"
+              >Logout</a
+            >
+          </div>
         </div>
       </div>
     </nav>
@@ -232,420 +254,7 @@
         data-aos="zoom-in-down"
         class="grid grid-cols-1 md:grid-cols-3 gap-8"
         id="cardContainer"
-      >
-        <!-- Card -->
-        <div class="card transform hover:scale-105 transition-all duration-300">
-          <div
-            class="bg-gray-900/80 rounded-xl overflow-hidden backdrop-blur-lg"
-          >
-            <div class="relative">
-              <img
-                src="images/images1.jpg"
-                alt="Jacket"
-                class="w-full h-64 object-cover"
-              />
-
-              <div class="absolute top-4 right-4">
-                <button
-                  class="love-button p-2 bg-white/10 rounded-full backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform group-hover:scale-110"
-                >
-                  <svg
-                    class="heart-icon w-6 h-6 text-white transition-colors duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h6 class="text-xl font-semibold text-white">Jacket Orange</h6>
-                <span class="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-lg"
-                  >$100.00</span
-                >
-              </div>
-              <p class="text-gray-300 text-sm mb-6 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-                excepturi voluptatem.
-              </p>
-              <div class="flex flex-row-reverse justify-between items-center">
-                <button
-                  onclick="addToCart(this)"
-                  class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
-                >
-                  <svg
-                    class="w-5 h-5 text-white transition-transform duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span class="transition-all duration-300">Add to Cart</span>
-                </button>
-
-                <button class="p-2 hover:text-blue-400 transition-colors">
-                  <svg
-                    class="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card transform hover:scale-105 transition-all duration-300">
-          <div
-            class="bg-gray-900/80 rounded-xl overflow-hidden backdrop-blur-lg"
-          >
-            <div class="relative">
-              <img
-                src="images/images2.jpg"
-                alt="Jacket"
-                class="w-full h-64 object-cover"
-              />
-              <div class="absolute top-4 right-4">
-                <button
-                  class="love-button p-2 bg-white/10 rounded-full backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform group-hover:scale-110"
-                >
-                  <svg
-                    class="heart-icon w-6 h-6 text-white transition-colors duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h6 class="text-xl font-semibold text-white">Jacket Orange</h6>
-                <span class="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-lg"
-                  >130.99</span
-                >
-              </div>
-              <p class="text-gray-300 text-sm mb-6 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-                excepturi voluptatem.
-              </p>
-              <div class="flex flex-row-reverse justify-between items-center">
-                <button
-                  onclick="addToCart(this)"
-                  class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
-                >
-                  <svg
-                    class="w-5 h-5 text-white transition-transform duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span class="transition-all duration-300">Add to Cart</span>
-                </button>
-
-                <button class="p-2 hover:text-blue-400 transition-colors">
-                  <svg
-                    class="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card transform hover:scale-105 transition-all duration-300">
-          <div
-            class="bg-gray-900/80 rounded-xl overflow-hidden backdrop-blur-lg"
-          >
-            <div class="relative">
-              <img
-                src="images/images3.jpg"
-                alt="Jacket"
-                class="w-full h-64 object-cover"
-              />
-              <div class="absolute top-4 right-4">
-                <button
-                  class="love-button p-2 bg-white/10 rounded-full backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform group-hover:scale-110"
-                >
-                  <svg
-                    class="heart-icon w-6 h-6 text-white transition-colors duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h6 class="text-xl font-semibold text-white">Jacket Orange</h6>
-                <span class="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-lg"
-                  >$299.99</span
-                >
-              </div>
-              <p class="text-gray-300 text-sm mb-6 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-                excepturi voluptatem.
-              </p>
-              <div class="flex flex-row-reverse justify-between items-center">
-                <button
-                  onclick="addToCart(this)"
-                  class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
-                >
-                  <svg
-                    class="w-5 h-5 text-white transition-transform duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span class="transition-all duration-300">Add to Cart</span>
-                </button>
-
-                <button class="p-2 hover:text-blue-400 transition-colors">
-                  <svg
-                    class="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card transform hover:scale-105 transition-all duration-300">
-          <div
-            class="bg-gray-900/80 rounded-xl overflow-hidden backdrop-blur-lg"
-          >
-            <div class="relative">
-              <img
-                src="images/images4.jpg"
-                alt="Jacket"
-                class="w-full h-64 object-cover"
-              />
-              <div class="absolute top-4 right-4">
-                <button
-                  class="love-button p-2 bg-white/10 rounded-full backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform group-hover:scale-110"
-                >
-                  <svg
-                    class="heart-icon w-6 h-6 text-white transition-colors duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h6 class="text-xl font-semibold text-white">Jacket Orange</h6>
-                <span class="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-lg"
-                  >$299.99</span
-                >
-              </div>
-              <p class="text-gray-300 text-sm mb-6 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-                excepturi voluptatem.
-              </p>
-              <div class="flex flex-row-reverse justify-between items-center">
-                <button
-                  onclick="addToCart(this)"
-                  class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
-                >
-                  <svg
-                    class="w-5 h-5 text-white transition-transform duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span class="transition-all duration-300">Add to Cart</span>
-                </button>
-
-                <button class="p-2 hover:text-blue-400 transition-colors">
-                  <svg
-                    class="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card transform hover:scale-105 transition-all duration-300">
-          <div
-            class="bg-gray-900/80 rounded-xl overflow-hidden backdrop-blur-lg"
-          >
-            <div class="relative">
-              <img
-                src="images/images5.jpg"
-                alt="Jacket"
-                class="w-full h-64 object-cover"
-              />
-              <div class="absolute top-4 right-4">
-                <button
-                  class="love-button p-2 bg-white/10 rounded-full backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform group-hover:scale-110"
-                >
-                  <svg
-                    class="heart-icon w-6 h-6 text-white transition-colors duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="p-6">
-              <div class="flex justify-between items-center mb-4">
-                <h6 class="text-xl font-semibold text-white">Jacket Orange</h6>
-                <span class="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-lg"
-                  >$299.99</span
-                >
-              </div>
-              <p class="text-gray-300 text-sm mb-6 line-clamp-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-                excepturi voluptatem.
-              </p>
-              <div class="flex flex-row-reverse justify-between items-center">
-                <button
-                  onclick="addToCart(this)"
-                  class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0"
-                >
-                  <svg
-                    class="w-5 h-5 text-white transition-transform duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span class="transition-all duration-300">Add to Cart</span>
-                </button>
-
-                <button class="p-2 hover:text-blue-400 transition-colors">
-                  <svg
-                    class="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      ></div>
     </div>
 
     <!-- Cart Button -->
@@ -871,9 +480,9 @@
         }
       });
     </script>
-    <script src="main.js"></script>
-    <script src="../src/script.js"></script>
-    <script src="../src/logic/chart.js"></script>
+    <script src="script/main.js"></script>
+    <script src="script/script.js"></script>
+    <script src="script/chart.js" defer></script>
     <script>
       AOS.init();
     </script>

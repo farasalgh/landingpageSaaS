@@ -49,12 +49,12 @@ exports.login = async (req, res) => {
 
     // JSON Web Token (JWT)
     const token = jwt.sign(
-      { userId: user.id, email: user.email },
+      { userId: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ message: "Login berhasil!", token });
+    res.status(200).json({ message: 'Login berhasil!', token: token, role: user.role });
   } catch (error) {
     res
       .status(500)

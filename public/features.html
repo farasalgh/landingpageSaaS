@@ -61,9 +61,14 @@
               class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
               >Contact</a
             >
+            <a
+              href="/public/admin/dashboard.html"
+              class="admin-panel-link hidden hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+              >Admin Panel</a
+            >
           </div>
 
-          <div class="relative">
+          <div class="hidden md:relative md:block">
             <div
               id="profile-button"
               class="hidden md:flex md:rounded-full md:p-3 items-center space-x-4"
@@ -85,8 +90,7 @@
               <div class="border-t border-gray-bg-gray-900"></div>
               <a
                 href="#"
-                id="logout-button"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                class="logout-button block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >Logout</a
               >
             </div>
@@ -153,6 +157,24 @@
             class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 dark:bg-blue-60 hover:bg-gray-50 dark:hover:bg-gray-700/50"
             >Contact</a
           >
+          <a 
+                  href="/public/admin/dashboard.html" 
+                  class="admin-panel-link nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                >Admin Panel</a>
+          <div class="border-t border-gray-700"></div>
+
+          <div id="mobile-user-menu" class="hidden px-4 py-3 space-y-2">
+            <a
+              href="#"
+              class="nav-link block px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700/50"
+              >Profil Anda</a
+            >
+            <a
+              href="#"
+              class="logout-button nav-link block px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/20"
+              >Logout</a
+            >
+          </div>
         </div>
       </div>
     </nav>
@@ -447,7 +469,7 @@
       </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="script/main.js"></script>
     <script>
       AOS.init();
     </script>
