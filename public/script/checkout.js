@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cartItems.forEach(item => {
         const itemElement = document.createElement('div');
         itemElement.className = 'flex justify-between text-gray-300';
-        itemElement.innerHTML = `<span>${item.title} x ${item.quantity}</span> <span>$${(item.price * item.quantity).toFixed(2)}</span>`;
+        itemElement.innerHTML = `<span>${item.name} x ${item.quantity}</span> <span>$${(item.price * item.quantity).toFixed(2)}</span>`;
         orderSummaryDiv.appendChild(itemElement);
         totalPrice += item.price * item.quantity;
     });
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             phoneNumber: document.getElementById('phone-number').value,
             totalPrice: totalPrice,
             items: cartItems.map(item => ({
-                name: item.title,
+                name: item.name,
                 quantity: item.quantity,
                 price: item.price
             }))

@@ -24,39 +24,50 @@ document.addEventListener("DOMContentLoaded", () => {
  * Fungsi ini membaca data-* atribut dari tombol dan memanggil method dari class Cart.
  * @param {HTMLElement} button - Elemen tombol yang diklik.
  */
+// GANTI FUNGSI LAMA ANDA DENGAN VERSI DEBUGGING INI
 function addItemToCart(button) {
-  // Pastikan class Cart sudah diinisialisasi dan tersedia di window.cart
-  if (!window.cart) {
-    console.error("Cart is not initialized.");
-    return;
+  // Baris ini akan membersihkan console setiap kali tombol diklik agar lebih rapi
+  console.clear(); 
+  console.log("Tombol 'Add to Cart' diklik. Menganalisis elemen tombol...");
+  
+  // 1. Kita tampilkan seluruh elemen HTML tombolnya ke console
+  console.log("Elemen Tombol yang Diklik:", button);
+  
+  // 2. Kita coba baca semua dataset dari tombol tersebut
+  const productId = button.dataset.productId;
+  const productName = button.dataset.productName;
+  const productPrice = button.dataset.productPrice;
+  const productImage = button.dataset.productImage;
+  
+  console.log("--- Data yang berhasil dibaca dari dataset ---");
+  console.log("ID:", productId);
+  console.log("Name:", productName); // <-- KITA LIHAT APA NILAI INI
+  console.log("Price:", productPrice);
+  console.log("Image URL:", productImage); // <-- DAN APA NILAI INI
+  console.log("-----------------------------------------");
+
+  // Jika nama atau gambar tidak ada, kita hentikan dan beri tahu
+  if (!productName || !productImage) {
+      alert("DEBUG: Nama atau Gambar produk tidak ditemukan di atribut data-* tombol! Periksa fungsi displayProducts.");
+      return; 
   }
-
-  // Ambil data dari atribut data-*
-  const productData = {
-    id: button.dataset.productId,
-    name: button.dataset.productName,
-    price: parseFloat(button.dataset.productPrice),
-    image_url: button.dataset.productImage,
+  
+  // 3. Kita buat objek 'item' dari data yang kita baca
+  const item = {
+      id: productId,
+      name: productName,
+      price: parseFloat(productPrice),
+      image_url: productImage
   };
-
-  // Panggil method .addItem() dari class Cart Anda
-  window.cart.addItem(productData);
-
-  // (Opsional) Beri feedback visual pada tombol
-  const originalContent = button.innerHTML;
-  button.innerHTML = `
-      <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-      </svg>
-      <span>Added!</span>`;
-  button.classList.add("bg-green-600");
-  button.disabled = true;
-
-  setTimeout(() => {
-    button.innerHTML = originalContent;
-    button.classList.remove("bg-green-600");
-    button.disabled = false;
-  }, 2000);
+  
+  console.log("Objek 'item' yang akan ditambahkan ke keranjang:", item);
+  
+  // 4. Kita lanjutkan proses seperti biasa
+  if (window.cart) {
+    window.cart.addItem(item);
+  } else {
+    console.error("ERROR: window.cart tidak ditemukan!");
+  }
 }
 
 // Auth Function
@@ -339,7 +350,7 @@ async function displayProducts() {
   <div class="bg-gray-900/80 rounded-xl overflow-hidden backdrop-blur-lg">
     <div class="relative">
       <img 
-        src="${product.image_url || "images/placeholder.jpg"}" 
+        src="/public/images/${product.image_url || "images/placeholder.jpg"}"
         alt="${product.name}" 
         class="w-full h-64 object-cover"
       >

@@ -213,11 +213,11 @@ class Cart {
         "cart-item flex items-center gap-4 bg-gray-800/50 rounded-lg p-4 animate-slideIn";
       itemElement.style.animationDelay = `${index * 0.1}s`;
       itemElement.innerHTML = `
-                <img src="${item.image}" alt="${
+                <img src="/public/images/${item.image_url}" alt="${
         item.title
       }" class="w-20 h-20 object-cover rounded-lg">
                 <div class="flex-1">
-                    <h4 class="text-white font-semibold">${item.title}</h4>
+                    <h4 class="text-white font-semibold">${item.name}</h4>
                     <p class="text-blue-400">$${item.price.toFixed(2)}</p>
                     <p class="text-gray-400 text-sm">Total: $${(
                       item.price * item.quantity
