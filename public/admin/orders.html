@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin - Manajemen Pesanan</title>
+    </head>
+<body class="bg-gray-800 text-white p-8">
+    <h1 class="text-3xl font-bold mb-6">Manajemen Pesanan</h1>
+    <a href="dashboard.html" class="text-blue-400 mb-6 inline-block">&larr; Kembali ke Manajemen Produk</a>
+
+    <div class="overflow-x-auto bg-gray-900 rounded-lg">
+        <table class="w-full text-left">
+            <thead class="border-b border-gray-700">
+                <tr>
+                    <th class="p-4">ID</th>
+                    <th class="p-4">Nama Pelanggan</th>
+                    <th class="p-4">Total Harga</th>
+                    <th class="p-4">Status</th>
+                    <th class="p-4">Tanggal</th>
+                    <th class="p-4">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="orders-list">
+                </tbody>
+        </table>
+    </div>
+
+    <script src="script/orders.js" defer></script>
+</body>
+</html>

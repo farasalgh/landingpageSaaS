@@ -72,7 +72,13 @@ class Cart {
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        this.items.push({ ...item, quantity: 1 });
+        this.items.push({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image_url: item.image_url,
+          quantity: 1,
+        });
       }
 
       this.saveToLocalStorage();
@@ -123,8 +129,22 @@ class Cart {
       this.showNotification("Your cart is empty!", "error");
       return;
     }
-    // Implement checkout logic here
-    this.showNotification("Checkout process initiated!");
+
+    const authToken = localStorage.getItem("authToken");
+    if (!authToken) {
+      this.showNotification("You must be logged in to checkout!", "error");
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1500);
+      return;
+    }
+
+    localStorage.setItem("cartForCheckout", JSON.stringify(this.items));
+
+    this.showNotification("Redirecting to checkout...", "success");
+    setTimeout(() => {
+      window.location.href = "checkout.html";
+    }, 1000);
   }
 
   saveToLocalStorage() {
@@ -193,11 +213,11 @@ class Cart {
         "cart-item flex items-center gap-4 bg-gray-800/50 rounded-lg p-4 animate-slideIn";
       itemElement.style.animationDelay = `${index * 0.1}s`;
       itemElement.innerHTML = `
-                <img src="${item.image}" alt="${
+                <img src="/public/images/${item.image_url}" alt="${
         item.title
       }" class="w-20 h-20 object-cover rounded-lg">
                 <div class="flex-1">
-                    <h4 class="text-white font-semibold">${item.title}</h4>
+                    <h4 class="text-white font-semibold">${item.name}</h4>
                     <p class="text-blue-400">$${item.price.toFixed(2)}</p>
                     <p class="text-gray-400 text-sm">Total: $${(
                       item.price * item.quantity
@@ -300,81 +320,79 @@ class Cart {
 }
 
 // Global helper function untuk menambah item ke cartt
-window.addToCart = function(button) {
-    // Prevent multiple clicks
-    if (button.disabled) return;
-    
-    // selector card parent
-    const card = button.closest('.card') || button.closest('[class*="bg-gray-900"]');
-    
-    if (card && window.cart) {
-        try {
-            // Disable button temporarily
-            button.disabled = true;
-            
-            const title = card.querySelector('h6').textContent;
-            const priceElement = card.querySelector('span.px-4.py-2');
-            const price = parseFloat(priceElement.textContent.replace('$', ''));
-            const image = card.querySelector('img').src;
-            
-            const item = {
-                id: `item-${Date.now()}`,
-                title,
-                price,
-                image
-            };
-            
-            // Store original button content
-            const originalContent = button.innerHTML;
-            
-            // Change button appearance
-            button.classList.add('bg-green-600');
-            button.innerHTML = `
+window.addToCart = function (button) {
+  // Prevent multiple clicks
+  if (button.disabled) return;
+
+  // selector card parent
+  const card =
+    button.closest(".card") || button.closest('[class*="bg-gray-900"]');
+
+  if (card && window.cart) {
+    try {
+      // Disable button temporarily
+      button.disabled = true;
+
+      const title = card.querySelector("h6").textContent;
+      const priceElement = card.querySelector("span.px-4.py-2");
+      const price = parseFloat(priceElement.textContent.replace("$", ""));
+      const image = card.querySelector("img").src;
+
+      const item = {
+        id: `item-${Date.now()}`,
+        title,
+        price,
+        image,
+      };
+
+      // Store original button content
+      const originalContent = button.innerHTML;
+
+      // Change button appearance
+      button.classList.add("bg-green-600");
+      button.innerHTML = `
                 <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                 </svg>
                 <span>Added!</span>
             `;
-            
-            // Add item to cart
-            window.cart.addItem(item);
-            
-            // Reset button after delay with animation
-            setTimeout(() => {
-                // Add transition class for smooth return
-                button.classList.add('transition-all', 'duration-300');
-                button.classList.remove('bg-green-600');
-                
-                // First fade out current content
-                button.style.opacity = '0';
-                
-                setTimeout(() => {
-                    // Reset content
-                    button.innerHTML = originalContent;
-                    // Fade back in
-                    button.style.opacity = '1';
-                    // Re-enable button
-                    button.disabled = false;
-                    
-                    // Remove transition classes after animation
-                    setTimeout(() => {
-                        button.classList.remove('transition-all', 'duration-300');
-                    }, 300);
-                }, 300);
-            }, 1500);
-            
-        } catch (error) {
-            console.error('Error adding item to cart:', error);
-            button.disabled = false;
-        }
-    } else {
-        console.error('Card not found or cart not initialized');
+
+      // Add item to cart
+      window.cart.addItem(item);
+
+      // Reset button after delay with animation
+      setTimeout(() => {
+        // Add transition class for smooth return
+        button.classList.add("transition-all", "duration-300");
+        button.classList.remove("bg-green-600");
+
+        // First fade out current content
+        button.style.opacity = "0";
+
+        setTimeout(() => {
+          // Reset content
+          button.innerHTML = originalContent;
+          // Fade back in
+          button.style.opacity = "1";
+          // Re-enable button
+          button.disabled = false;
+
+          // Remove transition classes after animation
+          setTimeout(() => {
+            button.classList.remove("transition-all", "duration-300");
+          }, 300);
+        }, 300);
+      }, 1500);
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+      button.disabled = false;
     }
+  } else {
+    console.error("Card not found or cart not initialized");
+  }
 };
 
-// Inisialisasi cart saat DOM loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Hanya inisialisasi cart sekali
   if (!window.cart) {
     window.cart = new Cart();
   }
