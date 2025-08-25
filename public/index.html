@@ -31,27 +31,27 @@
       >
 
       <div
-        class="hidden md:flex justify-center gap-8 items-center text-white"
-        id="navLinksContainer"
+        class="hidden md:flex flex-grow items-center justify-center gap-8 text-white"
+        id="nav-links-main"
       >
         <a
           href="#"
-          class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+          class="hover:underline nav-link hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
           >Home</a
         >
         <a
           href="features.html"
-          class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+          class="hover:underline nav-link hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
           >Features</a
         >
         <a
           href="market.html"
-          class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+          class="hover:underline nav-link hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
           >Collection</a
         >
         <a
           href="contact.html"
-          class="hover:underline hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
+          class="hover:underline nav-link hover:text-blue-500 transition-all delay-150 duration-300 ease-in-out"
           >Contact</a
         >
         <a 
@@ -60,7 +60,9 @@
         >Admin Panel</a>
       </div>
 
-      <div class="hidden md:relative md:block">
+      <div id="nav-auth-section" class="hidden md:relative md:block">
+
+        <div id="profile-button-container" class="relative">
             <div
               id="profile-button"
               class="hidden md:flex md:rounded-full md:p-3 items-center space-x-4"
@@ -86,46 +88,62 @@
                 >Logout</a
               >
             </div>
+            </div>
+
+            <div id="desktop-login-button-container">
+                <a href="login.html" class="px-4 py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700">
+                    Login
+                </a>
+            </div>
           </div>
 
-      <button
-        id="mobile-menu-button"
-        class="md:hidden p-2 rounded-lg text-white"
-      >
-        <svg
-          id="hamburger-icon"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+      <div class="md:hidden flex items-center">
+
+         <div id="mobile-guest-menu">
+            <a href="login.html" class="px-4 py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700">
+                Login
+            </a>
+        </div>
+
+        <button
+          id="mobile-menu-button"
+          class="md:hidden p-2 rounded-lg text-white"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-        <svg
-          id="close-icon"
-          class="h-6 w-6 hidden"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
+          <svg
+            id="hamburger-icon"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          <svg
+            id="close-icon"
+            class="h-6 w-6 hidden"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
   <div id="mobile-menu" class="md:hidden bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 opacity-0">
-            <div class="px-4 py-3 space-y-2">
+            <div id="mobile-nav-links" class="px-4 py-3 space-y-2">
                 <a href="#" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 bg-blue-600">Home</a>
                 <a href="features.html" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50">Features</a>
                 <a href="market.html" class="nav-link block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50">Collection</a>
@@ -148,8 +166,8 @@
             >Logout</a
           >
         </div>
-            </div>
-        </div>
+      </div>
+    </div>
 </nav>
 
   <!-- Hero Section -->
@@ -310,7 +328,7 @@
     </div>
 
     <div class="flex flex-col md:flex-row md:justify-around w-full  mt-10">
-      <img data-aos="fade-right" src="static/image1.jpg" class="rounded-2xl md:h-full md:w-[1200px] h-[400px] w-[600px]" alt="">
+      <img data-aos="fade-right" src="static/image1.jpg" class="rounded-2xl md:h-full md:w-[1000px] h-[400px] w-[600px]" alt="">
       <div class="ml-7 " data-aos="fade-left">
         <span
           class="inline-flex items-center mt-14 px-4 py-1 rounded-full border border-[#3b82f6] bg-[#181923] mb-2 text-white text-sm font-medium shadow-sm">Fashion

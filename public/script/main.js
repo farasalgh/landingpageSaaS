@@ -11,98 +11,42 @@ document.addEventListener("DOMContentLoaded", () => {
     initLeafletMap();
   }
 
-  adjustUIVisibilityBasedOnRole();
+  updateNavbarUI();
   displayProducts();
   initLoveButtons();
   initAuthUI();
 });
 
-// Di file main.js (di luar event listener DOMContentLoaded)
-
-/**
- * Fungsi global yang dipanggil oleh tombol 'Add to Cart' di HTML.
- * Fungsi ini membaca data-* atribut dari tombol dan memanggil method dari class Cart.
- * @param {HTMLElement} button - Elemen tombol yang diklik.
- */
-// GANTI FUNGSI LAMA ANDA DENGAN VERSI DEBUGGING INI
-function addItemToCart(button) {
-  // Baris ini akan membersihkan console setiap kali tombol diklik agar lebih rapi
-  console.clear(); 
-  console.log("Tombol 'Add to Cart' diklik. Menganalisis elemen tombol...");
-  
-  // 1. Kita tampilkan seluruh elemen HTML tombolnya ke console
-  console.log("Elemen Tombol yang Diklik:", button);
-  
-  // 2. Kita coba baca semua dataset dari tombol tersebut
-  const productId = button.dataset.productId;
-  const productName = button.dataset.productName;
-  const productPrice = button.dataset.productPrice;
-  const productImage = button.dataset.productImage;
-  
-  console.log("--- Data yang berhasil dibaca dari dataset ---");
-  console.log("ID:", productId);
-  console.log("Name:", productName); // <-- KITA LIHAT APA NILAI INI
-  console.log("Price:", productPrice);
-  console.log("Image URL:", productImage); // <-- DAN APA NILAI INI
-  console.log("-----------------------------------------");
-
-  // Jika nama atau gambar tidak ada, kita hentikan dan beri tahu
-  if (!productName || !productImage) {
-      alert("DEBUG: Nama atau Gambar produk tidak ditemukan di atribut data-* tombol! Periksa fungsi displayProducts.");
-      return; 
-  }
-  
-  // 3. Kita buat objek 'item' dari data yang kita baca
-  const item = {
-      id: productId,
-      name: productName,
-      price: parseFloat(productPrice),
-      image_url: productImage
-  };
-  
-  console.log("Objek 'item' yang akan ditambahkan ke keranjang:", item);
-  
-  // 4. Kita lanjutkan proses seperti biasa
-  if (window.cart) {
-    window.cart.addItem(item);
-  } else {
-    console.error("ERROR: window.cart tidak ditemukan!");
-  }
-}
-
 // Auth Function
 function checkAuthStatus() {
   const authToken = localStorage.getItem("authToken");
   const userRole = localStorage.getItem("userRole");
-  const publicPages = ["login.html", "register.html"];
+  const publicPagesForGuest = ["login.html", "register.html", "index.html"];
 
-  let currentPage = window.location.pathname.split("/").pop() || "index.html";
+  let currentPage = window.location.pathname.split("/").pop();
+
+  if (currentPage === "") {
+    currentPage = "index.html";
+  }
 
   const isAdminPage = window.location.pathname.includes("/admin/");
 
   if (!authToken) {
-    console.log("Status: Logged Out.");
-    if (!publicPages.includes(currentPage)) {
-      console.log(
-        `Page '${currentPage}' is PROTECTED. Redirecting to login...`
-      );
-      window.location.href = "/public/login.html";
-    } else {
-      console.log(`Page '${currentPage}' is PUBLIC. Access allowed.`);
+    if (!publicPagesForGuest.includes(currentPage)) {
+      console.log("Akses ditolak (mode tamu). Halaman ini memerlukan login.");
+      alert("Anda harus login untuk mengakses halaman ini.");
+      window.location.href = "login.html";
     }
   } else {
-    console.log("Status: Logged In.", "Role:", userRole);
-    if (isAdminPage) {
-      if (userRole !== "admin") {
-        console.log(
-          "Access to admin page DENIED (not an admin). Redirecting to home..."
-        );
-        alert("Anda tidak memiliki hak akses untuk halaman ini.");
-        window.location.href = "/public/index.html";
-      }
-    } else if (publicPages.includes(currentPage)) {
-      console.log("Already logged in. Redirecting to home page...");
-      window.location.href = "/public/index.html";
+    if (isAdminPage && userRole !== "admin") {
+      console.log("Akses ditolak (bukan admin). Mengarahkan ke halaman utama.");
+      alert("Anda tidak memiliki hak akses untuk halaman ini.");
+      window.location.href = "index.html";
+    }
+
+    if (currentPage === "login.html" || currentPage === "register.html") {
+      console.log("Anda sudah login. Mengarahkan ke halaman utama...");
+      window.location.href = "index.html";
     }
   }
 }
@@ -110,8 +54,6 @@ function checkAuthStatus() {
 // navbar
 document.addEventListener("DOMContentLoaded", function () {
   const navbar = document.querySelector("nav");
-  const logo = document.getElementById("logo");
-  const navLinksContainer = document.getElementById("navLinksContainer");
 
   const mobileMenu = document.getElementById("mobile-menu");
   const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -184,48 +126,33 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-/**
- * Menginisialisasi semua elemen UI yang bergantung pada status otentikasi.
- * Menggabungkan logika dropdown desktop, menu mobile, dan tombol logout.
- */
 function initAuthUI() {
-  // --- 1. Ambil semua informasi & elemen yang relevan ---
   const authToken = localStorage.getItem("authToken");
   const userRole = localStorage.getItem("userRole");
 
-  // Elemen Desktop
   const profileButtonDesktop = document.getElementById("profile-button");
   const profileDropdownDesktop = document.getElementById("profile-dropdown");
 
-  // Elemen Mobile
   const mobileUserMenu = document.getElementById("mobile-user-menu");
   const mobileGuestMenu = document.getElementById("mobile-guest-menu");
 
-  // Elemen Admin (bisa lebih dari satu)
   const adminPanelLinks = document.querySelectorAll(".admin-panel-link");
-
-  // Elemen Logout (bisa lebih dari satu)
   const logoutButtons = document.querySelectorAll(".logout-button");
 
-  // --- 2. Atur Tampilan berdasarkan Status Login ---
   if (authToken) {
-    // Pengguna SUDAH LOGIN
     if (profileButtonDesktop) profileButtonDesktop.classList.remove("hidden");
     if (mobileUserMenu) mobileUserMenu.classList.remove("hidden");
     if (mobileGuestMenu) mobileGuestMenu.classList.add("hidden");
 
-    // Tampilkan link admin jika rolenya 'admin'
     if (userRole === "admin") {
       adminPanelLinks.forEach((link) => link.classList.remove("hidden"));
     }
   } else {
-    // Pengguna BELUM LOGIN
     if (profileButtonDesktop) profileButtonDesktop.classList.add("hidden");
     if (mobileUserMenu) mobileUserMenu.classList.add("hidden");
     if (mobileGuestMenu) mobileGuestMenu.classList.remove("hidden");
   }
 
-  // --- 3. Logika untuk Dropdown Desktop (dari kode Anda) ---
   if (profileButtonDesktop && profileDropdownDesktop) {
     let isDropdownOpen = false;
     const toggleDropdown = () => {
@@ -255,35 +182,58 @@ function initAuthUI() {
     });
   }
 
-  // --- 4. Logika untuk SEMUA Tombol Logout (versi perbaikan) ---
   logoutButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
       localStorage.removeItem("authToken");
-      localStorage.removeItem("userRole"); // Hapus juga role saat logout
+      localStorage.removeItem("userRole");
       alert("Anda telah berhasil logout.");
-      window.location.href = "login.html"; // Sesuaikan path jika perlu
+      window.location.href = "login.html";
     });
   });
 }
 
-function adjustUIVisibilityBasedOnRole() {
-  const userRole = localStorage.getItem("userRole");
-  const adminPanelLinks = document.querySelectorAll(".admin-panel-link");
+function updateNavbarUI() {
+  const authToken = localStorage.getItem('authToken');
+  const userRole = localStorage.getItem('userRole');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
-  console.log("Checking role for UI adjustment. Role:", userRole);
+  const mainNavLinks = document.getElementById('nav-links-main');
+  const profileButtonContainer = document.getElementById('profile-button-container');
+  const desktopLoginButtonContainer = document.getElementById('desktop-login-button-container');
+  const adminPanelLinks = document.querySelectorAll('.admin-panel-link');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileLoginButtonContainer = document.getElementById('mobile-login-button-container');
 
-  if (userRole === "admin") {
-    adminPanelLinks.forEach((link) => {
-      link.classList.remove("hidden");
-    });
-    console.log("Admin detected, showing Admin Panel links.");
+  if (mainNavLinks) {
+    if (!authToken && currentPage === 'index.html') {
+      mainNavLinks.classList.remove('md:flex');
+    } else {
+      mainNavLinks.classList.add('md:flex');
+    }
+  }
+
+  if (authToken) {
+    if (profileButtonContainer) profileButtonContainer.classList.remove('hidden');
+    if (desktopLoginButtonContainer) desktopLoginButtonContainer.classList.add('hidden');
+    if (mobileMenuButton) mobileMenuButton.classList.remove('hidden');
+    if (mobileLoginButtonContainer) mobileLoginButtonContainer.classList.add('hidden');
+
+    if (userRole === 'admin') {
+      adminPanelLinks.forEach(link => link.classList.remove('hidden'));
+    } else {
+      adminPanelLinks.forEach(link => link.classList.add('hidden'));
+    }
+
   } else {
-    adminPanelLinks.forEach((link) => {
-      link.classList.add("hidden");
-    });
+    if (profileButtonContainer) profileButtonContainer.classList.add('hidden');
+    if (desktopLoginButtonContainer) desktopLoginButtonContainer.classList.remove('hidden');
+    if (mobileMenuButton) mobileMenuButton.classList.add('hidden');
+    if (mobileLoginButtonContainer) mobileLoginButtonContainer.classList.remove('hidden');
+    adminPanelLinks.forEach(link => link.classList.add('hidden'));
   }
 }
+
 
 // FAQ Accordion Animation
 document.addEventListener("DOMContentLoaded", () => {
@@ -311,7 +261,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Products
 async function displayProducts() {
-  // Ganti 'cardContainer' jika ID wadah utama Anda berbeda
   const productContainer = document.getElementById("cardContainer");
   if (!productContainer) {
     console.log(
@@ -339,13 +288,10 @@ async function displayProducts() {
     }
 
     products.forEach((product) => {
-      // 1. Buat div pembungkus luar ('card')
       const productCardWrapper = document.createElement("div");
       productCardWrapper.className =
         "card transform hover:scale-105 transition-all duration-300";
 
-      // 2. Buat HTML untuk isi kartu di dalamnya
-      //    Ini sama persis dengan struktur yang Anda berikan.
       const cardInnerHTML = `
   <div class="bg-gray-900/80 rounded-xl overflow-hidden backdrop-blur-lg">
     <div class="relative">
@@ -392,16 +338,46 @@ async function displayProducts() {
   </div>
 `;
 
-      // 3. Masukkan HTML isi kartu ke dalam div pembungkus luar
       productCardWrapper.innerHTML = cardInnerHTML;
 
-      // 4. Masukkan seluruh kartu yang sudah jadi ke dalam wadah utama
       productContainer.appendChild(productCardWrapper);
     });
   } catch (error) {
     console.error("Failed to load products:", error);
     productContainer.innerHTML =
       '<p class="text-center text-red-500 col-span-full">Failed to load products. Please try again later.</p>';
+  }
+}
+
+/**
+ * @param {HTMLElement} button -
+ */
+function addItemToCart(button) {
+  const productId = button.dataset.productId;
+  const productName = button.dataset.productName;
+  const productPrice = button.dataset.productPrice;
+  const productImage = button.dataset.productImage;
+
+  if (!productName || !productImage) {
+    alert(
+      "DEBUG: Nama atau Gambar produk tidak ditemukan di atribut data-* tombol! Periksa fungsi displayProducts."
+    );
+    return;
+  }
+
+  const item = {
+    id: productId,
+    name: productName,
+    price: parseFloat(productPrice),
+    image_url: productImage,
+  };
+
+  console.log("Objek 'item' yang akan ditambahkan ke keranjang:", item);
+
+  if (window.cart) {
+    window.cart.addItem(item);
+  } else {
+    console.error("ERROR: window.cart tidak ditemukan!");
   }
 }
 
@@ -551,25 +527,14 @@ function jsonp(url, options, callback) {
 }
 
 // Love Animation
-/**
- * Mengatur tombol "love" menggunakan Event Delegation
- * agar berfungsi untuk kartu produk yang dimuat secara dinamis.
- */
 function initLoveButtons() {
   const productContainer = document.getElementById("cardContainer");
-  // Jika wadah produk tidak ada di halaman ini, hentikan fungsi.
   if (!productContainer) return;
 
-  // Pasang SATU event listener di wadah utama.
   productContainer.addEventListener("click", function (event) {
-    // Cek apakah elemen yang diklik (atau induknya) adalah sebuah .love-button
     const loveButton = event.target.closest(".love-button");
 
-    // Jika yang di-klik bukan love-button, abaikan dan hentikan fungsi.
-    if (!loveButton) return;
-
-    // Jika yang di-klik adalah love-button, jalankan logika Anda
-    console.log("Love button clicked!");
+    if (!loveButton) return
     const heartIcon = loveButton.querySelector(".heart-icon");
 
     heartIcon.classList.toggle("fill-pink-500");
