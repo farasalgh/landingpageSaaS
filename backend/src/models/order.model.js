@@ -68,6 +68,20 @@ class Order {
       connection.release();
     }
   }
+
+  static async findByUserId(userId) {
+    const ordersSql = 'SELECT * FROM orders WHERE user_id = ? ORDER BY order_date DESC';
+    const [orders] = await pool.query(ordersSql, [userId]);
+
+    for (const order of orders) {
+      const itemsSql = 'SELECT product_name, quantity, price_per_item FROM order_items WHERE order_id = ?';
+      const [items] = await pool.query(itemsSql, [order.id]);
+      order.items = items;
+    }
+
+    return orders;
+  }
+  
 }
 
 module.exports = Order;

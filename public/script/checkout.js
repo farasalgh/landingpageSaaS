@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             localStorage.removeItem('cartForCheckout');
-            localStorage.removeItem('shoppingCart');
+            localStorage.removeItem('cart');
             window.location.href = `/public/order-success.html?orderId=${result.orderId}`;
         } catch (error) {
             alert(error.message);
