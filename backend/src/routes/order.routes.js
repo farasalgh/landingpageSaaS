@@ -5,6 +5,7 @@ const authMiddleware = require('../middlewares/auth.js');
 const adminAuthMiddleware = require('../middlewares/adminAuth.js');
 
 router.post('/', authMiddleware, orderController.placeOrder);
+router.get('/myorders', authMiddleware, orderController.getUserOrders);
 
 // Admin Only
 router.get('/', [authMiddleware, adminAuthMiddleware], orderController.getAllOrders);

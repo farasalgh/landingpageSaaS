@@ -1,6 +1,9 @@
 // Auth User
 checkAuthStatus();
 
+// Define URL
+const API_BASE_URL = 'http://localhost:3000';
+
 // init
 document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("contact-form")) {
@@ -9,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (document.getElementById("mapid")) {
     initLeafletMap();
+  }
+
+  if (window.location.pathname.includes("user-panel.html")) {
+    loadUserOrders();
   }
 
   updateNavbarUI();
@@ -194,46 +201,59 @@ function initAuthUI() {
 }
 
 function updateNavbarUI() {
-  const authToken = localStorage.getItem('authToken');
-  const userRole = localStorage.getItem('userRole');
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const authToken = localStorage.getItem("authToken");
+  const userRole = localStorage.getItem("userRole");
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  const userPanelLinks = document.querySelectorAll('.user-panel-link');
 
-  const mainNavLinks = document.getElementById('nav-links-main');
-  const profileButtonContainer = document.getElementById('profile-button-container');
-  const desktopLoginButtonContainer = document.getElementById('desktop-login-button-container');
-  const adminPanelLinks = document.querySelectorAll('.admin-panel-link');
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileLoginButtonContainer = document.getElementById('mobile-login-button-container');
+  const mainNavLinks = document.getElementById("nav-links-main");
+  const profileButtonContainer = document.getElementById(
+    "profile-button-container"
+  );
+  const desktopLoginButtonContainer = document.getElementById(
+    "desktop-login-button-container"
+  );
+  const adminPanelLinks = document.querySelectorAll(".admin-panel-link");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileLoginButtonContainer = document.getElementById(
+    "mobile-login-button-container"
+  );
 
   if (mainNavLinks) {
-    if (!authToken && currentPage === 'index.html') {
-      mainNavLinks.classList.remove('md:flex');
+    if (!authToken && currentPage === "index.html") {
+      mainNavLinks.classList.remove("md:flex");
     } else {
-      mainNavLinks.classList.add('md:flex');
+      mainNavLinks.classList.add("md:flex");
     }
   }
 
   if (authToken) {
-    if (profileButtonContainer) profileButtonContainer.classList.remove('hidden');
-    if (desktopLoginButtonContainer) desktopLoginButtonContainer.classList.add('hidden');
-    if (mobileMenuButton) mobileMenuButton.classList.remove('hidden');
-    if (mobileLoginButtonContainer) mobileLoginButtonContainer.classList.add('hidden');
+    if (profileButtonContainer)
+      profileButtonContainer.classList.remove("hidden");
+    if (desktopLoginButtonContainer)
+      desktopLoginButtonContainer.classList.add("hidden");
+    if (mobileMenuButton) mobileMenuButton.classList.remove("hidden");
+    if (mobileLoginButtonContainer)
+      mobileLoginButtonContainer.classList.add("hidden");
 
-    if (userRole === 'admin') {
-      adminPanelLinks.forEach(link => link.classList.remove('hidden'));
+    if (userRole === "admin") {
+      adminPanelLinks.forEach((link) => link.classList.remove("hidden"));
+      userPanelLinks.forEach(link => link.style.display = 'none');
     } else {
-      adminPanelLinks.forEach(link => link.classList.add('hidden'));
+      adminPanelLinks.forEach((link) => link.classList.add("hidden"));
+      userPanelLinks.forEach(link => link.style.display = 'block');
     }
-
   } else {
-    if (profileButtonContainer) profileButtonContainer.classList.add('hidden');
-    if (desktopLoginButtonContainer) desktopLoginButtonContainer.classList.remove('hidden');
-    if (mobileMenuButton) mobileMenuButton.classList.add('hidden');
-    if (mobileLoginButtonContainer) mobileLoginButtonContainer.classList.remove('hidden');
-    adminPanelLinks.forEach(link => link.classList.add('hidden'));
+    if (profileButtonContainer) profileButtonContainer.classList.add("hidden");
+    if (desktopLoginButtonContainer)
+      desktopLoginButtonContainer.classList.remove("hidden");
+    if (mobileMenuButton) mobileMenuButton.classList.add("hidden");
+    if (mobileLoginButtonContainer)
+      mobileLoginButtonContainer.classList.remove("hidden");
+      adminPanelLinks.forEach((link) => link.classList.add("hidden"));
+      userPanelLinks.forEach(link => link.style.display = 'none');
   }
 }
-
 
 // FAQ Accordion Animation
 document.addEventListener("DOMContentLoaded", () => {
@@ -273,7 +293,7 @@ async function displayProducts() {
     productContainer.innerHTML =
       '<p class="text-center text-gray-400 col-span-full">Loading products...</p>';
 
-    const response = await fetch("http://localhost:3000/api/products");
+    const response = await fetch(`${API_BASE_URL}/api/products`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -378,6 +398,97 @@ function addItemToCart(button) {
     window.cart.addItem(item);
   } else {
     console.error("ERROR: window.cart tidak ditemukan!");
+  }
+}
+
+// User Panel
+async function loadUserOrders() {
+  const ordersContainer = document.getElementById("orders-container");
+  const loadingMessage = document.getElementById("loading-message");
+  const authToken = localStorage.getItem("authToken");
+
+  if (!authToken) {
+    alert("Anda harus login untuk melihat halaman ini.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/orders/myorders`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Gagal mengambil data pesanan.");
+    }
+
+    const orders = await response.json();
+
+    loadingMessage.remove();
+
+    if (orders.length === 0) {
+      ordersContainer.innerHTML = "<p>Anda belum memiliki riwayat pesanan.</p>";
+      return;
+    }
+
+    orders.forEach((order) => {
+      const orderCard = document.createElement("div");
+      orderCard.className =
+        "bg-[#181923] p-6 rounded-lg border border-gray-700";
+
+      const orderDate = new Date(order.order_date).toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+
+      let itemsHtml = '<ul class="list-disc list-inside mt-2 text-gray-400">';
+      order.items.forEach((item) => {
+        itemsHtml += `<li>${item.quantity}x ${item.product_name}</li>`;
+      });
+      itemsHtml += "</ul>";
+
+      orderCard.innerHTML = `
+        <div class="flex justify-between items-center mb-2">
+          <h2 class="text-xl font-semibold">Pesanan #${order.id}</h2>
+          <span class="px-3 py-1 text-sm rounded-full ${getStatusColor(
+            order.status
+          )}">${order.status}</span>
+        </div>
+        <p class="text-sm text-gray-400 mb-4">Tanggal: ${orderDate}</p>
+        <div>
+          <h3 class="font-semibold">Item:</h3>
+          ${itemsHtml}
+        </div>
+        <div class="border-t border-gray-600 mt-4 pt-4 text-right">
+          <p class="text-lg font-bold">Total: Rp ${new Intl.NumberFormat(
+            "id-ID"
+          ).format(order.total_price)}</p>
+        </div>
+      `;
+      ordersContainer.appendChild(orderCard);
+    });
+  } catch (error) {
+    loadingMessage.textContent = `Error: ${error.message}`;
+  }
+}
+
+function getStatusColor(status) {
+  switch (status.toLowerCase()) {
+    case "pending":
+      return "bg-yellow-500/20 text-yellow-400";
+    case "shipped":
+      return "bg-blue-500/20 text-blue-400";
+    case "delivered":
+      return "bg-green-500/20 text-green-400";
+    case "cancelled":
+      return "bg-red-500/20 text-red-400";
+    default:
+      return "bg-gray-500/20 text-gray-400";
   }
 }
 
@@ -534,7 +645,7 @@ function initLoveButtons() {
   productContainer.addEventListener("click", function (event) {
     const loveButton = event.target.closest(".love-button");
 
-    if (!loveButton) return
+    if (!loveButton) return;
     const heartIcon = loveButton.querySelector(".heart-icon");
 
     heartIcon.classList.toggle("fill-pink-500");

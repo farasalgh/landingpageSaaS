@@ -44,10 +44,10 @@ exports.getOrderById = async (req, res) => {
     if (order) {
       res.status(200).json(order);
     } else {
-      res.status(404).json({ message: 'Pesanan tidak ditemukan.' });
+      res.status(404).json({ message: "Pesanan tidak ditemukan." });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -56,12 +56,14 @@ exports.updateOrderStatus = async (req, res) => {
     const { status } = req.body;
     const success = await Order.updateStatus(req.params.id, status);
     if (success) {
-      res.status(200).json({ message: `Status pesanan berhasil diubah menjadi ${status}` });
+      res
+        .status(200)
+        .json({ message: `Status pesanan berhasil diubah menjadi ${status}` });
     } else {
-      res.status(404).json({ message: 'Pesanan tidak ditemukan.' });
+      res.status(404).json({ message: "Pesanan tidak ditemukan." });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -69,11 +71,24 @@ exports.deleteOrder = async (req, res) => {
   try {
     const success = await Order.delete(req.params.id);
     if (success) {
-      res.status(200).json({ message: 'Pesanan berhasil dihapus!' });
+      res.status(200).json({ message: "Pesanan berhasil dihapus!" });
     } else {
-      res.status(404).json({ message: 'Pesanan tidak ditemukan.' });
+      res.status(404).json({ message: "Pesanan tidak ditemukan." });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
+  }
+}; 
+
+exports.getUserOrders = async (req, res) => {
+  try {
+    const userId = req.userData.userId;
+
+    const orders = await Order.findByUserId(userId);
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error saat mengambil pesanan pengguna:", error);
+    res.status(500).json({ message: "Terjadi kesalahan pada server." });
   }
 };
