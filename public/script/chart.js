@@ -6,6 +6,7 @@ class Cart {
     this.total = 0;
     this.count = 0;
     this.modal = document.getElementById("cartModal");
+    this.isToastVisible = false;
 
     // Verify modal exists
     if (!this.modal) {
@@ -304,22 +305,56 @@ class Cart {
     }
   }
 
+  // showNotification(message, type = "success") {
+  //   if (this.isToastVisible) {
+  //   return;
+  // }
+
+  // this.isToastVisible = true;
+
+  //   const notification = document.createElement("div");
+  //   notification.className = `fixed bottom-24 right-8 p-4 rounded-lg text-white ${
+  //     type === "success" ? "bg-green-500" : "bg-red-500"
+  //   } shadow-lg z-50 animate-slideIn`;
+  //   notification.textContent = message;
+  //   document.body.appendChild(notification);
+
+  //   setTimeout(() => {
+  //     notification.classList.add("animate-slideOut");
+  //     setTimeout(() => notification.remove(), 300);
+  //   }, 3000);
+  // }
+
   showNotification(message, type = "success") {
+    if (this.isToastVisible) {
+      return;
+    }
+
+    this.isToastVisible = true;
+
     const notification = document.createElement("div");
-    notification.className = `fixed bottom-24 right-8 p-4 rounded-lg text-white ${
+    notification.className = `fixed bottom-5 right-5 px-4 py-2 rounded-lg text-white ${
       type === "success" ? "bg-green-500" : "bg-red-500"
-    } shadow-lg z-50 animate-slideIn`;
+    } shadow-lg z-[100] transition-all duration-300 transform translate-x-[120%]`;
     notification.textContent = message;
     document.body.appendChild(notification);
 
     setTimeout(() => {
-      notification.classList.add("animate-slideOut");
-      setTimeout(() => notification.remove(), 300);
+      notification.classList.remove("translate-x-[120%]");
+    }, 100);
+
+    setTimeout(() => {
+      notification.classList.add("translate-x-[120%]");
+
+      setTimeout(() => {
+        notification.remove();
+        this.isToastVisible = false;
+      }, 300);
     }, 3000);
   }
 }
 
-// Global helper function untuk menambah item ke cartt
+// Global helper function untuk menambah item ke cart
 window.addToCart = function (button) {
   // Prevent multiple clicks
   if (button.disabled) return;
