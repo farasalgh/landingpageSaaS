@@ -2,7 +2,7 @@
 checkAuthStatus();
 
 // Define URL
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = "http://localhost:3000";
 
 // init
 document.addEventListener("DOMContentLoaded", () => {
@@ -204,7 +204,7 @@ function updateNavbarUI() {
   const authToken = localStorage.getItem("authToken");
   const userRole = localStorage.getItem("userRole");
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
-  const userPanelLinks = document.querySelectorAll('.user-panel-link');
+  const userPanelLinks = document.querySelectorAll(".user-panel-link");
 
   const mainNavLinks = document.getElementById("nav-links-main");
   const profileButtonContainer = document.getElementById(
@@ -238,10 +238,10 @@ function updateNavbarUI() {
 
     if (userRole === "admin") {
       adminPanelLinks.forEach((link) => link.classList.remove("hidden"));
-      userPanelLinks.forEach(link => link.style.display = 'none');
+      userPanelLinks.forEach((link) => (link.style.display = "none"));
     } else {
       adminPanelLinks.forEach((link) => link.classList.add("hidden"));
-      userPanelLinks.forEach(link => link.style.display = 'block');
+      userPanelLinks.forEach((link) => (link.style.display = "block"));
     }
   } else {
     if (profileButtonContainer) profileButtonContainer.classList.add("hidden");
@@ -250,8 +250,8 @@ function updateNavbarUI() {
     if (mobileMenuButton) mobileMenuButton.classList.add("hidden");
     if (mobileLoginButtonContainer)
       mobileLoginButtonContainer.classList.remove("hidden");
-      adminPanelLinks.forEach((link) => link.classList.add("hidden"));
-      userPanelLinks.forEach(link => link.style.display = 'none');
+    adminPanelLinks.forEach((link) => link.classList.add("hidden"));
+    userPanelLinks.forEach((link) => (link.style.display = "none"));
   }
 }
 
@@ -338,11 +338,10 @@ async function displayProducts() {
       <p class="text-gray-300 text-sm mb-6 line-clamp-2">
         ${product.description}
       </p>
-      <div class="flex flex-row-reverse justify-between items-center">
+      <div class="flex flex-row-reverse justify-start gap-2 items-center">
         <button 
           onclick="addItemToCart(this)" 
           class="add-to-cart-btn flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300"
-          
           data-product-id="${product.id}"
           data-product-name="${product.name}"
           data-product-price="${product.price}"
@@ -353,7 +352,19 @@ async function displayProducts() {
           </svg>
           <span>Add to Cart</span>
         </button>
-        </div>
+        
+        <button 
+          onclick="showProductDetail(event, this)"
+          class="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg text-white hover:bg-gray-800 transition-all duration-300"
+          data-product='${JSON.stringify(product)}'
+        >
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span>Detail</span>
+        </button>
+      </div>
     </div>
   </div>
 `;
@@ -368,6 +379,83 @@ async function displayProducts() {
       '<p class="text-center text-red-500 col-span-full">Failed to load products. Please try again later.</p>';
   }
 }
+
+// Function to show product detail modal
+// Fungsi untuk menampilkan modal detail produk
+function showProductDetail(event, button) {
+    event.stopPropagation();
+
+    const product = JSON.parse(button.dataset.product);
+    const modal = document.getElementById("productDetailModal");
+    const modalContent = modal.querySelector('div.relative'); // Ambil elemen konten modal
+
+    const modalProductName = document.getElementById("modalProductName");
+    const modalProductPrice = document.getElementById("modalProductPrice");
+    const modalProductDescription = document.getElementById("modalProductDescription");
+    const imageSlider = document.getElementById("imageSlider");
+    const modalAddToCartBtn = document.getElementById("modalAddToCartBtn");
+
+    // Isi modal dengan data produk
+    modalProductName.textContent = product.name;
+    modalProductPrice.textContent = `$${parseFloat(product.price).toFixed(2)}`;
+    modalProductDescription.textContent = product.description;
+
+    // Hapus gambar sebelumnya dan tambahkan gambar baru
+    imageSlider.innerHTML = `
+        <img 
+          src="/public/images/${product.image_url || "images/placeholder.jpg"}"
+          alt="${product.name}" 
+          class="w-full h-96 object-cover rounded-2xl"
+        >
+    `;
+
+    // Perbarui atribut data tombol "Add to Cart" di modal
+    modalAddToCartBtn.dataset.productId = product.id;
+    modalAddToCartBtn.dataset.productName = product.name;
+    modalAddToCartBtn.dataset.productPrice = product.price;
+    modalAddToCartBtn.dataset.productImage = product.image_url;
+
+    // Tampilkan modal dengan transisi
+    modal.classList.remove("hidden");
+    modal.classList.add("flex"); // Tambahkan kelas 'flex' untuk menampilkan backdrop
+    
+    // Tunggu sebentar agar browser merender perubahan, lalu mulai transisi
+    // Ini penting agar transisi dari opacity-0 ke opacity-100 bisa berjalan
+    setTimeout(() => {
+        modalContent.classList.remove('opacity-0', 'scale-95');
+        modalContent.classList.add('opacity-100', 'scale-100');
+    }, 10);
+}
+
+// Fungsi untuk menutup modal detail produk
+function closeProductDetailModal() {
+    const modal = document.getElementById("productDetailModal");
+    const modalContent = modal.querySelector('div.relative');
+
+    // Mulai transisi untuk menyembunyikan
+    modalContent.classList.remove('opacity-100', 'scale-100');
+    modalContent.classList.add('opacity-0', 'scale-95');
+
+    // Tunggu transisi selesai (300ms) sebelum menyembunyikan modal sepenuhnya
+    setTimeout(() => {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+    }, 300); // Sesuaikan dengan durasi transisi di CSS (duration-300)
+}
+
+// Event listener untuk tombol "Add to Cart" di dalam modal
+document.getElementById("modalAddToCartBtn").addEventListener('click', function() {
+    addItemToCart(this);
+    closeProductDetailModal();
+});
+
+// Tutup modal saat mengklik area di luar kontennya
+document.getElementById("productDetailModal").addEventListener("click", function(event) {
+    // Pastikan event.target adalah modal itu sendiri, bukan elemen di dalamnya
+    if (event.target === this) {
+        closeProductDetailModal();
+    }
+});
 
 /**
  * @param {HTMLElement} button -
@@ -401,7 +489,10 @@ function addItemToCart(button) {
   }
 }
 
-// User Panel
+//User panel
+let allOrders = [];
+
+// Load data orders user
 async function loadUserOrders() {
   const ordersContainer = document.getElementById("orders-container");
   const loadingMessage = document.getElementById("loading-message");
@@ -422,75 +513,122 @@ async function loadUserOrders() {
       },
     });
 
-    if (!response.ok) {
-      throw new Error("Gagal mengambil data pesanan.");
-    }
+    if (!response.ok) throw new Error("Gagal mengambil data pesanan.");
 
-    const orders = await response.json();
+    allOrders = await response.json(); // simpan semua orders
 
     loadingMessage.remove();
 
-    if (orders.length === 0) {
-      ordersContainer.innerHTML = "<p>Anda belum memiliki riwayat pesanan.</p>";
-      return;
-    }
+    // Update card statistik dari allOrders
+    updateOrderStats();
 
-    orders.forEach((order) => {
-      const orderCard = document.createElement("div");
-      orderCard.className =
-        "bg-[#181923] p-6 rounded-lg border border-gray-700";
-
-      const orderDate = new Date(order.order_date).toLocaleDateString("id-ID", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      });
-
-      let itemsHtml = '<ul class="list-disc list-inside mt-2 text-gray-400">';
-      order.items.forEach((item) => {
-        itemsHtml += `<li>${item.quantity}x ${item.product_name}</li>`;
-      });
-      itemsHtml += "</ul>";
-
-      orderCard.innerHTML = `
-        <div class="flex justify-between items-center mb-2">
-          <h2 class="text-xl font-semibold">Pesanan #${order.id}</h2>
-          <span class="px-3 py-1 text-sm rounded-full ${getStatusColor(
-            order.status
-          )}">${order.status}</span>
-        </div>
-        <p class="text-sm text-gray-400 mb-4">Tanggal: ${orderDate}</p>
-        <div>
-          <h3 class="font-semibold">Item:</h3>
-          ${itemsHtml}
-        </div>
-        <div class="border-t border-gray-600 mt-4 pt-4 text-right">
-          <p class="text-lg font-bold">Total: Rp ${new Intl.NumberFormat(
-            "id-ID"
-          ).format(order.total_price)}</p>
-        </div>
-      `;
-      ordersContainer.appendChild(orderCard);
-    });
+    // Render daftar pesanan (default semua)
+    renderOrders("all");
   } catch (error) {
     loadingMessage.textContent = `Error: ${error.message}`;
   }
 }
 
+// Hitung dan update angka di card
+function updateOrderStats() {
+  const totalOrdersEl = document.getElementById("total-orders");
+  const deliveredOrdersEl = document.getElementById("delivered-orders");
+  const processingOrdersEl = document.getElementById("processing-orders");
+
+  if (!totalOrdersEl || !deliveredOrdersEl || !processingOrdersEl) {
+    console.warn("Elemen card tidak ditemukan di DOM.");
+    return;
+  }
+
+  const totalOrders = allOrders.length;
+  const deliveredOrders = allOrders.filter(
+    (order) => order.status.toLowerCase() === "shipped"
+  ).length;
+  const processingOrders = allOrders.filter(
+    (order) => order.status.toLowerCase() === "pending"
+  ).length;
+
+  totalOrdersEl.textContent = totalOrders;
+  deliveredOrdersEl.textContent = deliveredOrders;
+  processingOrdersEl.textContent = processingOrders;
+}
+
+// Render list pesanan sesuai filter
+function renderOrders(filter) {
+  const ordersContainer = document.getElementById("orders-container");
+  ordersContainer.innerHTML = "";
+
+  let filteredOrders = allOrders;
+  if (filter !== "all") {
+    filteredOrders = allOrders.filter(
+      (order) => order.status.toLowerCase() === filter
+    );
+  }
+
+  if (filteredOrders.length === 0) {
+    ordersContainer.innerHTML = "<p>Tidak ada pesanan untuk filter ini.</p>";
+    return;
+  }
+
+  filteredOrders.forEach((order) => {
+    const orderCard = document.createElement("div");
+    orderCard.className = "bg-[#181923] p-6 rounded-lg border border-gray-700";
+
+    const orderDate = new Date(order.order_date).toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+    let itemsHtml = '<ul class="list-disc list-inside mt-2 text-gray-400">';
+    order.items.forEach((item) => {
+      itemsHtml += `<li>${item.quantity}x ${item.product_name}</li>`;
+    });
+    itemsHtml += "</ul>";
+
+    orderCard.innerHTML = `
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="text-xl font-semibold">Order #${order.id}</h2>
+        <span class="px-3 py-1 text-sm rounded-full ${getStatusColor(
+          order.status
+        )}">${order.status}</span>
+      </div>
+      <p class="text-sm text-gray-400 mb-4">Date: ${orderDate}</p>
+      <div>
+        <h3 class="font-semibold">Items:</h3>
+        ${itemsHtml}
+      </div>
+      <div class="border-t border-gray-600 mt-4 pt-4 text-right">
+        <p class="text-lg font-bold">Total: $${new Intl.NumberFormat(
+          "en-US"
+        ).format(order.total_price)}</p>
+      </div>
+    `;
+    ordersContainer.appendChild(orderCard);
+  });
+}
+
+// Warna status
 function getStatusColor(status) {
   switch (status.toLowerCase()) {
     case "pending":
       return "bg-yellow-500/20 text-yellow-400";
     case "shipped":
       return "bg-blue-500/20 text-blue-400";
-    case "delivered":
-      return "bg-green-500/20 text-green-400";
     case "cancelled":
       return "bg-red-500/20 text-red-400";
     default:
       return "bg-gray-500/20 text-gray-400";
   }
 }
+
+// Event filter dropdown
+document.getElementById("filter-orders").addEventListener("change", (e) => {
+  renderOrders(e.target.value);
+});
+
+// Load data saat halaman dibuka
+loadUserOrders();
 
 // EmailJs
 function initContactForm() {
