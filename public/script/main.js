@@ -443,19 +443,86 @@ function closeProductDetailModal() {
     }, 300); // Sesuaikan dengan durasi transisi di CSS (duration-300)
 }
 
-// Event listener untuk tombol "Add to Cart" di dalam modal
-document.getElementById("modalAddToCartBtn").addEventListener('click', function() {
-    addItemToCart(this);
-    closeProductDetailModal();
-});
+// function checkout 1 barang
+function checkoutNow() {
+    console.log("Fungsi checkoutNow() dipanggil...");
 
-// Tutup modal saat mengklik area di luar kontennya
-document.getElementById("productDetailModal").addEventListener("click", function(event) {
-    // Pastikan event.target adalah modal itu sendiri, bukan elemen di dalamnya
-    if (event.target === this) {
-        closeProductDetailModal();
+    // 1. Ambil data produk dasar dari atribut data tombol "Add to Cart"
+    //    (Ini adalah cara yang efisien karena data sudah disimpan di sana oleh fungsi showProductDetail)
+    const addToCartBtn = document.getElementById('modalAddToCartBtn');
+    const productId = addToCartBtn.dataset.productId;
+    const productName = addToCartBtn.dataset.productName;
+    const productPrice = addToCartBtn.dataset.productPrice;
+
+    // 2. Validasi pilihan ukuran (karena ada radio button untuk ukuran)
+    const selectedSizeElement = document.querySelector('input[name="size"]:checked');
+    
+    if (!selectedSizeElement) {
+        // Jika tidak ada ukuran yang dipilih, beri peringatan dan hentikan fungsi
+        alert('Silakan pilih ukuran terlebih dahulu!');
+        return; // Menghentikan eksekusi fungsi
     }
-});
+    
+    const selectedSize = selectedSizeElement.value;
+
+    // 3. Siapkan objek data produk untuk di-checkout
+    const productToCheckout = {
+        id: productId,
+        name: productName,
+        price: productPrice,
+        size: selectedSize,
+        quantity: 1 // Checkout langsung diasumsikan 1 barang
+    };
+
+    // 4. Tampilkan data di console untuk debugging
+    console.log("Data produk yang akan di-checkout:", productToCheckout);
+
+    // 5. Buat URL untuk halaman checkout dengan data produk sebagai parameter
+    //    Ini adalah cara umum untuk mengirim data ke halaman berikutnya.
+    const queryParams = new URLSearchParams(productToCheckout).toString();
+    const checkoutUrl = `checkout.html?${queryParams}`; // Ganti '/halaman-checkout.html' dengan URL halaman checkout Anda
+
+    // 6. Arahkan pengguna ke halaman checkout
+    window.location.href = checkoutUrl;
+}
+
+// --- Logika untuk Modal Detail Produk ---
+
+// 1. Ambil semua elemen yang berhubungan dengan modal
+const modalAddToCartBtn = document.getElementById("modalAddToCartBtn");
+const productDetailModal = document.getElementById("productDetailModal");
+
+// 2. Pasang event listener untuk tombol 'Add to Cart' di dalam modal, HANYA JIKA tombolnya ada
+if (modalAddToCartBtn) {
+    modalAddToCartBtn.addEventListener('click', function() {
+        addItemToCart(this);
+        closeProductDetailModal();
+    });
+}
+
+// 3. Pasang event listener untuk menutup modal, HANYA JIKA modalnya ada
+if (productDetailModal) {
+    productDetailModal.addEventListener("click", function(event) {
+        // Pastikan event.target adalah modal itu sendiri, bukan elemen di dalamnya
+        if (event.target === this) {
+            closeProductDetailModal();
+        }
+    });
+}
+
+// Event listener untuk tombol "Add to Cart" di dalam modal
+// document.getElementById("modalAddToCartBtn").addEventListener('click', function() {
+//     addItemToCart(this);
+//     closeProductDetailModal();
+// });
+
+// // Tutup modal saat mengklik area di luar kontennya
+// document.getElementById("productDetailModal").addEventListener("click", function(event) {
+//     // Pastikan event.target adalah modal itu sendiri, bukan elemen di dalamnya
+//     if (event.target === this) {
+//         closeProductDetailModal();
+//     }
+// });
 
 /**
  * @param {HTMLElement} button -
@@ -525,7 +592,9 @@ async function loadUserOrders() {
     // Render daftar pesanan (default semua)
     renderOrders("all");
   } catch (error) {
-    loadingMessage.textContent = `Error: ${error.message}`;
+    if (loadingMessage) {
+        loadingMessage.textContent = `Error: ${error.message}`;
+    } 
   }
 }
 
@@ -623,9 +692,18 @@ function getStatusColor(status) {
 }
 
 // Event filter dropdown
-document.getElementById("filter-orders").addEventListener("change", (e) => {
-  renderOrders(e.target.value);
-});
+// document.getElementById("filter-orders").addEventListener("change", (e) => {
+//   renderOrders(e.target.value);
+// });
+
+const filterOrdersDropdown = document.getElementById("filter-orders");
+
+// Jika elemennya ada, baru pasang event listener
+if (filterOrdersDropdown) {
+  filterOrdersDropdown.addEventListener("change", (e) => {
+    renderOrders(e.target.value);
+  });
+}
 
 // Load data saat halaman dibuka
 loadUserOrders();

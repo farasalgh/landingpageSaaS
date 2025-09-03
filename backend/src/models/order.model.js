@@ -36,6 +36,21 @@ class Order {
     return rows;
   }
 
+  static async findAllWithItems() {
+    // Query utama untuk mendapatkan semua pesanan
+    const ordersSql = 'SELECT * FROM orders ORDER BY order_date DESC';
+    const [orders] = await pool.query(ordersSql);
+
+    // Sama seperti findByUserId, kita loop untuk mengambil item-itemnya
+    for (const order of orders) {
+      const itemsSql = 'SELECT product_name, quantity, price_per_item FROM order_items WHERE order_id = ?';
+      const [items] = await pool.query(itemsSql, [order.id]);
+      order.items = items; // Sisipkan array item ke dalam setiap objek pesanan
+    }
+
+    return orders;
+  }
+
   static async findById(orderId) {
     const [orderRows] = await pool.query('SELECT * FROM orders WHERE id = ?', [orderId]);
     if (orderRows.length === 0) return null;
