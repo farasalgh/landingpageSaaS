@@ -1,25 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="script/connection.js" defer></script>
-    <title>Register</title>
-  </head>
-  <body>
-    <h3>Register</h3>
-    <form id="registerForm">
-      <input type="email" id="registerEmail" placeholder="Email" required />
-      <input
-        type="password"
-        id="registerPassword"
-        placeholder="Password"
-        required
-      />
-      <button type="submit">Register</button>
-      <a href="login.html">Login</a>
-      <a href="index.html">Guest Mode</a>
-    </form>
-    <div id="registerMessage"></div>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="../src/input.css" />
+  <link rel="stylesheet" href="../src/output.css" />
+  <script src="script/connection.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+    }
+
+    .login-container {
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .illustration {
+      background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    }
+  </style>
+</head>
+
+<body class="bg-[#111215] min-h-screen hero-bg-glow flex items-center justify-center p-4">
+
+  <section class="max">
+
+    
+    <div class="login-container  shadow-2xl w-full max-w-5xl rounded-2xl flex flex-col md:flex-row overflow-hidden">
+      <!-- Bagian kiri dengan gambar -->
+      <div
+        class="bg-gray-500 bg-clip-padding backdrop-filter  backdrop-blur-sm bg-opacity-10 backdrop-saturate-100 backdrop-contrast-125 w-full md:w-1/2 p-10 flex flex-col justify-center items-center text-center">
+        <div class="mb-8">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-white mx-auto" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+          </svg>
+        </div>
+        <h2 class="text-3xl font-bold text-white mb-4">Aparels16 Store</h2>
+        <p class="text-gray-200 mb-6">Kelola barang, peminjaman, dan pengembalian dengan mudah dan efisien</p>
+        <div class="grid grid-cols-3 gap-4 mt-8">
+          <div class="bg-transparent p-3 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white mx-auto" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+          </div>
+          <div class="bg-transparent p-3 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white mx-auto" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </div>
+          <div class="bg-transparent p-3 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white mx-auto" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bagian kanan dengan form login -->
+      <div
+        class="w-full bg-gray-500 bg-clip-padding backdrop-filter  backdrop-blur-sm bg-opacity-10 backdrop-saturate-100 backdrop-contrast-125 md:w-1/2 p-10 flex flex-col justify-center">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold text-white">Buat Akun sekarang</h1>
+          <p class="text-gray-100 mt-2">Silakan masuk untuk mengakses dashboard</p>
+        </div>
+
+        <div id="registerMessage"></div>
+
+        <form id="registerForm" method="POST" class="space-y-6">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text text-gray-100 font-medium">Email</span>
+            </label>
+            <input type="email" id="registerEmail" name="email" placeholder="Masukkan email"
+              class="input input-bordered focus:border-blue-400 w-full bg-transparent" required />
+          </div>
+
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text text-gray-100 font-medium">Kata Sandi</span>
+            </label>
+            <input type="password" id="registerPassword" name="password" placeholder="Masukkan password"
+              class="input input-bordered w-full bg-transparent" required />
+          </div>
+
+          <div class="form-control mt-8">
+            <button type="submit" class="btn btn-primary w-full text-white bg-blue-600 hover:bg-blue-900">Daftar</button>
+          </div>
+        </form>
+
+        <div class="divider my-8">ATAU</div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <button class="btn btn-outline w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 488 512" fill="currentColor">
+              <path
+                d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
+            </svg>
+            Google
+          </button>
+          <button class="btn btn-outline w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 448 512" fill="currentColor">
+              <path
+                d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+            </svg>
+            Facebook
+          </button>
+        </div>
+
+        <div class="text-center mt-8">
+          <p class="text-gray-100">Sudah punya akun? <a href="/public/login.html"
+              class="text-gray-300 font-medium hover:underline">Login sekarang</a></p>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+
+</body>
+
 </html>
