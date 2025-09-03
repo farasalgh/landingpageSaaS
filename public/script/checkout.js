@@ -1,30 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Seleksi elemen-elemen penting dari halaman
     const orderSummaryDiv = document.getElementById('order-summary');
     const totalPriceSpan = document.getElementById('total-price');
     const checkoutForm = document.getElementById('checkout-form');
+    
+    let cartItems = []; // Variabel untuk menyimpan item yang akan di-checkout
 
-    const cartItems = JSON.parse(localStorage.getItem('cartForCheckout'));
+    // 2. Logika untuk mendapatkan data item (bisa dari localStorage atau URL)
+    const itemsFromStorage = JSON.parse(localStorage.getItem('cartForCheckout'));
 
+    if (itemsFromStorage && itemsFromStorage.length > 0) {
+        cartItems = itemsFromStorage;
+    } else {
+        const params = new URLSearchParams(window.location.search);
+        const productFromUrl = {
+            id: params.get('id'),
+            name: params.get('name'),
+            price: parseFloat(params.get('price')),
+            size: params.get('size'),
+            quantity: parseInt(params.get('quantity')) || 1,
+            image_url: params.get('image_url')
+        };
+
+        if (productFromUrl.name && productFromUrl.price) {
+            cartItems = [productFromUrl];
+        }
+    }
+
+    // 3. Tampilkan data item di Ringkasan Pesanan
     if (!cartItems || cartItems.length === 0) {
-        orderSummaryDiv.innerHTML = '<p>Tidak ada item untuk di-checkout.</p>';
+        orderSummaryDiv.innerHTML = '<p class="text-gray-400">Tidak ada item untuk di-checkout.</p>';
+        totalPriceSpan.textContent = '$0.00'; // Ubah default menjadi Dolar
         return;
     }
 
     let totalPrice = 0;
-    cartItems.forEach(item => {
-        const itemElement = document.createElement('div');
-        itemElement.className = 'flex justify-between text-gray-300';
-        itemElement.innerHTML = `<span>${item.name} x ${item.quantity}</span> <span>$${(item.price * item.quantity).toFixed(2)}</span>`;
-        orderSummaryDiv.appendChild(itemElement);
-        totalPrice += item.price * item.quantity;
-    });
-    totalPriceSpan.innerText = `$${totalPrice.toFixed(2)}`;
+    orderSummaryDiv.innerHTML = ''; 
 
+    // BUAT FORMATTER UNTUK USD
+    const usdFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
+    cartItems.forEach(item => {
+        const itemPrice = item.price * item.quantity;
+        totalPrice += itemPrice;
+
+        const itemElement = document.createElement('div');
+        itemElement.className = 'flex justify-between items-center text-sm py-2';
+        itemElement.innerHTML = `
+            <div>
+                <p class="font-semibold text-white">${item.name}</p>
+                <p class="text-gray-400">Jumlah: ${item.quantity}</p>
+            </div>
+            <p class="text-gray-200">${usdFormatter.format(itemPrice)}</p>
+        `;
+        orderSummaryDiv.appendChild(itemElement);
+    });
+
+    // GUNAKAN FORMATTER USD UNTUK TOTAL
+    totalPriceSpan.textContent = usdFormatter.format(totalPrice);
+
+    // 4. Logika untuk submit form checkout (tidak ada perubahan di sini)
     checkoutForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         
         const authToken = localStorage.getItem('authToken');
-        const submitButton = checkoutForm.querySelector('button');
+        const submitButton = checkoutForm.querySelector('button[type="submit"]');
         submitButton.innerText = 'Processing...';
         submitButton.disabled = true;
 
@@ -57,7 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             localStorage.removeItem('cartForCheckout');
             localStorage.removeItem('cart');
-            window.location.href = `/public/order-success.html?orderId=${result.orderId}`;
+            window.location.href = `order-success.html?orderId=${result.orderId}`;
+
         } catch (error) {
             alert(error.message);
             submitButton.innerText = 'Place Order';

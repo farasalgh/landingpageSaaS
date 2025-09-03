@@ -29,6 +29,16 @@ exports.placeOrder = async (req, res) => {
   }
 };
 
+exports.getAllOrdersAdmin = async (req, res) => {
+  try {
+    const orders = await Order.findAllWithItems();
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error saat mengambil semua pesanan untuk admin:', error);
+    res.status(500).json({ message: 'Terjadi kesalahan pada server.' });
+  }
+};
+
 exports.getAllOrders = async (req, res) => {
   try {
     const orders = await Order.findAll();
